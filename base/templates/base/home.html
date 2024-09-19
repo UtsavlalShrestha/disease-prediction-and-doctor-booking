@@ -1,18 +1,25 @@
-{% extends 'main.html' %}
+{% extends 'main.html' %} {% load static %} {% block content %}
 
-{% load static %}
-
-{% block content %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
 
 <div class="home-container">
-    <div class="disp-image">
-        <img src="{% static 'images/home2.jpg' %}" alt="Home Image" class="home-image">
-    </div>
-    <div class="disp-content">
-        <h1>About Us!</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit temporibus praesentium numquam corporis obcaecati tempore delectus sunt alias, iste illum excepturi natus magnam at sapiente ratione reprehenderit quod autem facilis impedit culpa maiores esse inventore. Numquam molestias est, officiis, consequatur accusantium expedita cupiditate similique nesciunt voluptas excepturi laborum quo assumenda.</p>
-    </div>
+  <div class="disp-image">
+    <img
+      src="{% static 'images/home2.jpg' %}"
+      alt="Home Image"
+      class="home-image"
+    />
+  </div>
+  <div class="disp-content">
+    <h1>About Us!</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit temporibus
+      praesentium numquam corporis obcaecati tempore delectus sunt alias, iste
+      illum excepturi natus magnam at sapiente ratione reprehenderit quod autem
+      facilis impedit culpa maiores esse inventore. Numquam molestias est,
+      officiis, consequatur accusantium expedita cupiditate similique nesciunt
+      voluptas excepturi laborum quo assumenda.
+    </p>
+  </div>
 </div>
 {% endblock content %}
