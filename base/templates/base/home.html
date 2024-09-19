@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>    
+    .home-container{
+        display: grid;
+        width: 90%;
+        grid-template-columns: 2fr 1fr;
+        margin: auto;
+    }
+    .disp-image .home-image{
+        margin-left: 3%;
+        width: 70%;
+        height: 650px;
+        object-fit: cover;
+        transition: all 0.5s ease-in-out;
+    }
+    .disp-image .home-image:hover {
+        width: 72%;
+        height: 666px;
+        transition: width 0.5s, height 0.5s ease-out; 
+    }
+    .disp-content {
+        display: grid;
+        place-items: center;
+        gap: 0; 
+    }
+
+    .disp-content h1,
+    .disp-content p {
+        margin: 0; 
+        padding: 0; 
+        line-height: 1; 
+    }
+
+</style>
+
+<div class="home-container">
+    <div class="disp-image">
+        <img src="{% static 'images/home2.jpg' %}" alt="Home Image" class="home-image">
+    </div>
+    <div class="disp-content">
+        <h1>About Us!</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit temporibus praesentium numquam corporis obcaecati tempore delectus sunt alias, iste illum excepturi natus magnam at sapiente ratione reprehenderit quod autem facilis impedit culpa maiores esse inventore. Numquam molestias est, officiis, consequatur accusantium expedita cupiditate similique nesciunt voluptas excepturi laborum quo assumenda.</p>
+    </div>
+</div>
+{% endblock content %}

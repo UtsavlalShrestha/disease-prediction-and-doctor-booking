@@ -1,0 +1,30 @@
+    .home-container{
+        display: grid;
+        width: 90%;
+        grid-template-columns: 2fr 1fr;
+        margin: auto;
+    }
+    .disp-image .home-image{
+        margin-left: 3%;
+        width: 70%;
+        height: 650px;
+        object-fit: cover;
+        transition: all 0.5s ease-in-out;
+    }
+    .disp-image .home-image:hover {
+        width: 72%;
+        height: 666px;
+        transition: width 0.5s, height 0.5s ease-out; 
+    }
+    .disp-content {
+        display: grid;
+        place-items: center;
+        gap: 0; 
+    }
+
+    .disp-content h1,
+    .disp-content p {
+        margin: 0; 
+        padding: 0; 
+        line-height: 1; 
+    }
