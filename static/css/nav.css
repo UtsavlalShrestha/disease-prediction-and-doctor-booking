@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.nav{
+    background-color: rgb(31, 136, 202);
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+    
+    
+}
+.nav .login .button1{
+    width: 90px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
