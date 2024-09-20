@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="/static/css/logout.css">
+<form method="post" action="" class="logout-form">
+    {% csrf_token %}
+    <p>Are you sure you want to logout?</p>
+    <input type="submit" value="Logout" name="Logout">
+    <input type="submit" value="Go back" name="Go back">
+</form>
+{% endblock %}

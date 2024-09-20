@@ -29,9 +29,17 @@ def loginUser(request):
     context={'page':page}
     return render(request, 'base/login_register.html', context)
 
-# def logOut(request):
-#     context ={}
-#     return(render,, context)
+
+def logoutUser(request):
+    if request.method == 'POST':
+        if request.POST.get("Logout") == "Logout":
+            logout(request)
+            return redirect('home')
+        else:
+            return redirect('home')
+
+    context ={}
+    return render (request,'base/logout.html', context)
 
 
 def signupUser(request):

@@ -8,6 +8,11 @@
         </a>
     </div>
     
+    {% if user.is_authenticated %}
+    <div class="logout-b">
+        <a href="{% url 'logout' %}"><input type="submit" value="Logout" class="button0"></a>
+    </div>
+    {% else %}
     <div class="login-b">
         <a href="{% url 'login' %}"><input type="submit" value="Login" class="button1"></a>
     </div>
@@ -15,4 +20,5 @@
     <div class="signup-b">
         <a href="{% url 'signup' %}"><input type="submit" value="Sign Up" class="button2"></a>
     </div>
+    {% endif %}
 </div>
