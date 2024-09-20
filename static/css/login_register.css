@@ -45,7 +45,7 @@
 
 /* Styling the Sign up form */
 .form-container {
-    width: 300px;
+    width: 450px;
     margin: 20px auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -71,12 +71,17 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+.form-container input[type="password"]{
+    margin-bottom: 0px;
+
+}
 
 /* Styling the submit button */
 .form-container input[type="submit"].btn {
     background-color: #4CAF50;
     color: white;
     padding: 10px 15px;
+    margin-top: 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;

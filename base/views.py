@@ -53,6 +53,6 @@ def signupUser(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'Error occured during registration')
+            messages.error(request, 'Registration criteria not fulfilled registration')
     context={'form': form}
     return render(request, 'base/login_register.html', context)

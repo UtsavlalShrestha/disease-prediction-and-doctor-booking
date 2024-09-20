@@ -32,27 +32,31 @@
 <div class="form-container">
     <form method="post" action="">
         {% csrf_token %}
-        <label for="username">{{ form.username.label_tag }}</label>
-        {{ form.username }}<br>
-
-        <label for="email">{{ form.email.label_tag }}</label>
-        {{ form.email }} <br>
-
-        <label for="password1">{{ form.password1.label_tag }}</label>
-        {{ form.password1 }} <br>
-
-        <label for="password2">{{ form.password2.label_tag }}</label>
-        {{ form.password2 }} <br>
-
-        {% if messages %}
-        <div>
-            <!-- {% for message in messages %} -->
-            <div class="login-error">
-                {{ message }}
-            </div>
-            <!-- {% endfor %} -->
+        
+        <!-- Username Field -->
+        <div class="form-group">
+            <label for="username">Username:</label>
+            {{ form.username }}
         </div>
-        {% endif %}
+        
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            {{ form.email }}
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password:</label>
+            {{ form.password1 }}
+            <ul>
+                <li>Your password must contain at least 8 characters.</li>
+                <li>Your password can’t be entirely numeric.</li>       
+            </ul>
+        </div>
+        
+        <div class="form-group">
+            <label for="password_confirmation">Password confirmation:</label>
+            {{ form.password2 }}
+        </div>
 
         <input type="submit" value="Signup" class="btn">
     </form>
