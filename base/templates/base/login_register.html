@@ -1,5 +1,31 @@
 {% extends 'main.html' %}
 
+{% load static %}
 {% block content %}
-    
+{% if page == 'login' %}
+<link rel="stylesheet" type="text/css" href="/static/css/login_register.css">
+<div>
+    <form method="post" action="" class="login-form">
+        {% csrf_token %}
+        <br>
+        <label for="username">Username:</label><br>
+        <input type="text" name="username">
+        <br>
+        <label for="password">Password:</label><br>
+        <input type="password" name="password">
+        <br>
+
+        <input type="submit" value="Login">
+
+    </form>
+</div>
+{% else %}
+<div>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Signup">
+    </form>
+</div>
+{% endif %}
 {% endblock content %}
