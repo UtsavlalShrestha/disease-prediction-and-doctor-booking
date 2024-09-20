@@ -35,3 +35,53 @@
     background-color: #45a049; 
     
 }
+
+.login-error{
+    font-size: small;
+    color:red;
+    margin: 20px;
+}
+
+
+/* Styling the Sign up form */
+.form-container {
+    width: 300px;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the labels */
+.form-container label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Styling the input fields */
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container input[type="email"] {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Styling the submit button */
+.form-container input[type="submit"].btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.form-container input[type="submit"].btn:hover {
+    background-color: #45a049;
+}
