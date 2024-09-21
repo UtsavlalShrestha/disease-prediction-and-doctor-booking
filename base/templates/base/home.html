@@ -1,25 +1,15 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
+<body class="bd">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
+  <div class="homep">
+    <h1>Ensuring Healthy Lifestyle</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi iure harum accusantium consequatur doloribus accusamus culpa quidem, aperiam molestias, enim consequuntur commodi quisquam. Delectus molestiae et laboriosam explicabo earum illo iste modi dolor, exercitationem quia sit quidem expedita vel nam iusto! Amet eum, id tempora possimus quidem corporis molestiae illo!</p>
+  </div>
+  <div class="btns">
+    <input type="submit" value="Predict!" class="leftb">
+    <input type="submit" value="Appoint!" class="rightb">
 
-<div class="home-container">
-  <div class="disp-image">
-    <img
-      src="{% static 'images/home2.jpg' %}"
-      alt="Home Image"
-      class="home-image"
-    />
   </div>
-  <div class="disp-content">
-    <h1>About Us!</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit temporibus
-      praesentium numquam corporis obcaecati tempore delectus sunt alias, iste
-      illum excepturi natus magnam at sapiente ratione reprehenderit quod autem
-      facilis impedit culpa maiores esse inventore. Numquam molestias est,
-      officiis, consequatur accusantium expedita cupiditate similique nesciunt
-      voluptas excepturi laborum quo assumenda.
-    </p>
-  </div>
-</div>
+</body>
 {% endblock content %}

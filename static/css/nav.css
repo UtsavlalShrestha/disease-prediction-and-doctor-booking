@@ -16,7 +16,7 @@ html, body {
   margin-top: 20px;
   width: 90px;
   padding: 10px;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   cursor: pointer;
 }
 
