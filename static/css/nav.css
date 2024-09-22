@@ -4,24 +4,65 @@ html, body {
 }
 
 .nav {
-  background-color: #2676e6;
+  background-color: #ffffff;
   padding: 10px;
   display: grid;
   grid-template-columns: 8fr 0.65fr 0.65fr;
 }
 
-.nav .login-b .button1,
+.nav .login-b .button1{
+  margin-top: 0.35vw;
+  margin-right: 1.5vw;  /* Increased space between buttons for better separation */
+  width: 6.5vw;
+  padding: 0.6vw;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: transparent;
+  border: 2px solid #2676e6;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  color: #2676e6; /* Ensure color matches border */
+}
+
+.nav .login-b .button1:hover{
+  background-color: #2676e6;
+  color: white;
+}
+
 .nav .signup-b .button2,
 .nav .logout-b .button0 {
-  margin-top: 20px;
-  width: 90px;
-  padding: 10px;
-  /* border-radius: 20px; */
+  margin-top: 0.35vw;
+  margin-right: 1.5vw; 
+  width: 6.5vw;
+  padding: 0.6vw;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #2676e6;
+  border: 2px solid #2676e6;
+  color: white;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
+.nav .signup-b .button2:hover,
+.nav .logout-b .button0:hover {
+  background-color: white;
+  color: #2676e6;
+}
+
 a {
   color: #f5eded;
   text-decoration: none;
+}
+
+.logo {
+  text-align: left; /* To center the logo horizontally */
+}
+
+/* Make logo responsive */
+.logo img {
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto;
 }
 
 

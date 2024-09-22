@@ -41,6 +41,7 @@
 .leftb {
     background-color: transparent;
     border: 2px solid #2676e6;
+    color: #2676e6;
 }
 
 .leftb:hover {
@@ -57,7 +58,7 @@
 
 .rightb:hover {
     background-color: white;
-    color: black;
+    color: #2676e6;
 }
 
 /* Mid-section */
@@ -88,6 +89,8 @@
 
 .p2 .c1 p, .p2 .c2 p, .p2 .c3 p, .p2 .c4 p {
     visibility: hidden;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     opacity: 0;
     height: 0;
     transition: all 0.5s ease-in-out;
