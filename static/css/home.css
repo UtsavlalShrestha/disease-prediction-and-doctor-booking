@@ -88,6 +88,14 @@
 
 }
 
+.p2 .c1 p, .p2 .c2 p, .p2 .c3 p, .p2 .c4 p {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    transition: all 0.5s ease-in-out;
+    text-align: left;
+    margin: 20px;
+}
 
 .p2 .c1:hover, .p2 .c2:hover, .p2 .c3:hover, .p2 .c4:hover {
     background-color: #93b5e4; 
@@ -97,6 +105,13 @@
     transition: all 0.5s ease-in-out;
 }
 
+.p2 .c1:hover p, .p2 .c2:hover p, .p2 .c3:hover p, .p2 .c4:hover p {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+    white-space: normal;
+    overflow: visible;
+}
 .mid .doc img{
     padding: 70px 0px 70px 70px;
     width: 90%;
