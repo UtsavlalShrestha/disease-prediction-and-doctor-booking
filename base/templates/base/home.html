@@ -13,10 +13,14 @@
       corporis molestiae illo!
     </p>
   </div>
-  <div class="btns">
-    <input type="submit" value="Predict!" class="leftb" />
-    <input type="submit" value="Appoint!" class="rightb" />
-  </div>
+<div class="btns">
+    <form method="POST" action="{% url 'confirmOption' %}">
+        {% csrf_token %}
+        <button type="submit" class="leftb">Predict!</button>
+        <button type="submit" class="rightb">Appoint!</button>
+    </form>
+</div>
+
   <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
   <div class="mid">
@@ -63,24 +67,3 @@
   </div>
 </body>
 {% endblock content %}
-<!-- 
-
-<ul>
-  <li>Disease Prediction</li><br>
-  <li>Doctor Recommendation</li><br>
-  <li>Online Doctor Appointment Booking</li><br>
-  <li>Symptom Checker</li><br>
-  <li>Personalized Health Advice</li><br>          <li>Disease Prediction</li><br>
-  <li>Doctor Recommendation</li><br>
-  <li>Online Doctor Appointment Booking</li><br>
-  <li>Symptom Checker</li><br>
-  <li>Personalized Health Advice</li><br>          <li>Disease Prediction</li><br>
-  <li>Doctor Recommendation</li><br>
-  <li>Online Doctor Appointment Booking</li><br>
-  <li>Symptom Checker</li><br>
-  <li>Personalized Health Advice</li><br>          <li>Disease Prediction</li><br>
-  <li>Doctor Recommendation</li><br>
-  <li>Online Doctor Appointment Booking</li><br>
-  <li>Symptom Checker</li><br>
-  <li>Personalized Health Advice</li><br>
-</ul>  -->

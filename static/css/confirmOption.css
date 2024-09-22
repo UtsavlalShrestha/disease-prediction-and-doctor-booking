@@ -1,0 +1,39 @@
+.confirmOption {
+    width: 270px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.confirmOption button {
+    display: inline-flex;  
+    justify-content: center; /* Center align button content */
+    width: 45%;
+    padding: 10px;
+    margin: 10px 2.5%; /* Add margin for spacing between buttons */
+    border: none;  
+    border-radius: 5px;
+    background-color: #4CAF50;  
+    color: white;  
+    cursor: pointer;  
+}
+
+.confirmOption button:hover {
+    background-color: #45a049; 
+}
+
+.confirmOption a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #000000;  
+    text-align: center;
+}
+
+.confirmOption a:hover {  
+    color: #45a049;  
+}

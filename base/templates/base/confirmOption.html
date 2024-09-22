@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/confirmOption.css' %}">
+<form method="POST" class="confirmOption">
+    {% csrf_token %}
+    <p>Do you already have an account?</p>
+    <button type="submit" name="Yes" formaction="{% url 'login' %}">Yes</button>
+    <button type="submit" name="No" formaction="{% url 'signup' %}">No</button>
+
+    <a href="/">Go back!</a>
+</form>
+
+
+{% endblock %}

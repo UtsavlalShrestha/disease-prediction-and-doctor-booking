@@ -27,6 +27,8 @@ def loginUser(request):
             messages.error(request, 'Invalid username or password.')
     context={'page':page}
     return render(request, 'base/login_register.html', context)
+        
+        # {add options for login}
 
 
 def logoutUser(request):
@@ -39,6 +41,7 @@ def logoutUser(request):
 
     context ={}
     return render (request,'base/logout.html', context)
+
 
 
 def signupUser(request):
@@ -56,3 +59,7 @@ def signupUser(request):
             messages.error(request, 'Registration criteria not fulfilled registration')
     context={'form': form}
     return render(request, 'base/login_register.html', context)
+
+def confirmOption(request):
+    context={}
+    return render(request, 'base/confirmOption.html', context)
