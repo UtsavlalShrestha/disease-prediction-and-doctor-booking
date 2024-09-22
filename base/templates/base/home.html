@@ -13,13 +13,32 @@
       corporis molestiae illo!
     </p>
   </div>
-<div class="btns">
-    <form method="POST" action="{% url 'confirmOption' %}">
-        {% csrf_token %}
-        <button type="submit" class="leftb">Predict!</button>
-        <button type="submit" class="rightb">Appoint!</button>
-    </form>
+  <div class="btns">
+    {% if user.is_authenticated %}
+    <div class="button-group">
+        <form method="POST" action="{% url 'predict' %}" class="btns_after_auth"> 
+            {% csrf_token %}
+            <button type="submit" class="leftb">Predict!</button>
+        </form>
+        <form method="POST" action="{% url 'appoint' %}" class="btns_after_auth">
+            {% csrf_token %}
+            <button type="submit" class="rightb">Appoint!</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="button-group">
+        <form method="POST" action="{% url 'confirmOption' %}">
+            {% csrf_token %}
+            <button type="submit" class="leftb">Predict!</button>
+        </form>
+        <form method="POST" action="{% url 'confirmOption' %}">
+            {% csrf_token %}
+            <button type="submit" class="rightb">Appoint!</button>
+        </form>
+    </div>
+    {% endif %}
 </div>
+
 
   <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 

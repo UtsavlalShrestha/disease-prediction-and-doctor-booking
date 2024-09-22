@@ -24,7 +24,11 @@
 }
 
 .btns {
-    margin-left: 10vw; 
+    margin-left: 9.5vw; 
+}
+
+.button-group {
+    display: flex; 
 }
 
 .btns button {
@@ -58,9 +62,8 @@
 
 .rightb:hover {
     background-color: white;
-    color: #2676e6;
+    color: black;
 }
-
 /* Mid-section */
 .mid {
     margin-top: -100px;

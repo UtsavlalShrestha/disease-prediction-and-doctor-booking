@@ -63,3 +63,13 @@ def signupUser(request):
 def confirmOption(request):
     context={}
     return render(request, 'base/confirmOption.html', context)
+
+
+def predict(request):
+    context={}
+    return render(request, 'base/predict.html', context)
+
+
+def appoint(request):
+    context={}
+    return render(request, 'base/appoint.html', context)
