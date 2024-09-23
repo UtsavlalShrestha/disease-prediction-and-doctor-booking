@@ -25,7 +25,8 @@
 
 .homep h1 {
     font-weight: 700;
-    font-size: 3.125vw; /* viewport width for responsiveness */
+    font-size: 3.125vw;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .btns {
@@ -48,9 +49,9 @@
 
 /* Left button styling (Predict!) */
 .leftb {
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.258);
     border: 2px solid #3fb785;
-    color: green;
+    color: #3fb785;
 }
 
 .leftb:hover {
@@ -67,7 +68,7 @@
 
 .rightb:hover {
     background-color: white;
-    color: black;
+    color: #3fb785;
 }
 /* Mid-section */
 .mid {
