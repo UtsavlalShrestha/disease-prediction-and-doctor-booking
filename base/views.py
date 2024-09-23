@@ -28,7 +28,6 @@ def loginUser(request):
     context={'page':page}
     return render(request, 'base/login_register.html', context)
         
-        # {add options for login}
 
 
 def logoutUser(request):

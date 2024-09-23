@@ -1,5 +1,99 @@
 {% extends 'main.html' %}
-
+{%  load static %}
 {% block content %}
-<h1>Future predict ko lagi</h1>
+<link rel="stylesheet" type="text/css" href="/static/css/predict.css">
+<h2 class="predict_h2"><p>Welcome back, {{user.username}} 👋</p></h2>
+<div class="container">
+    <h4>Select Your Symptoms, {{user.username}}</h4>
+    <form method="post" action="">  
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="symptom1">Symptom 1:</label>
+            <select name="symptom1" required>
+                <option value="">Select Symptom 1</option>
+                <option value="anxiety and nervousness">Anxiety and Nervousness</option>
+                <option value="depression">Depression</option>
+                <option value="shortness of breath">Shortness of Breath</option>
+                <option value="depressive or psychotic symptoms">Depressive or Psychotic Symptoms</option>
+                <option value="sharp chest pain">Sharp Chest Pain</option>
+                <option value="dizziness">Dizziness</option>
+                <option value="insomnia">Insomnia</option>
+                <option value="abnormal involuntary movements">Abnormal Involuntary Movements</option>
+                <option value="chest tightness">Chest Tightness</option>
+                <option value="palpitations">Palpitations</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="symptom2">Symptom 2:</label>
+            <select name="symptom2" required>
+                <option value="">Select Symptom 2</option>
+                <option value="anxiety and nervousness">Anxiety and Nervousness</option>
+                <option value="depression">Depression</option>
+                <option value="shortness of breath">Shortness of Breath</option>
+                <option value="depressive or psychotic symptoms">Depressive or Psychotic Symptoms</option>
+                <option value="sharp chest pain">Sharp Chest Pain</option>
+                <option value="dizziness">Dizziness</option>
+                <option value="insomnia">Insomnia</option>
+                <option value="abnormal involuntary movements">Abnormal Involuntary Movements</option>
+                <option value="chest tightness">Chest Tightness</option>
+                <option value="palpitations">Palpitations</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="symptom3">Symptom 3:</label>
+            <select name="symptom3" required>
+                <option value="">Select Symptom 3</option>
+                <option value="anxiety and nervousness">Anxiety and Nervousness</option>
+                <option value="depression">Depression</option>
+                <option value="shortness of breath">Shortness of Breath</option>
+                <option value="depressive or psychotic symptoms">Depressive or Psychotic Symptoms</option>
+                <option value="sharp chest pain">Sharp Chest Pain</option>
+                <option value="dizziness">Dizziness</option>
+                <option value="insomnia">Insomnia</option>
+                <option value="abnormal involuntary movements">Abnormal Involuntary Movements</option>
+                <option value="chest tightness">Chest Tightness</option>
+                <option value="palpitations">Palpitations</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="symptom4">Symptom 4:</label>
+            <select name="symptom4" required>
+                <option value="">Select Symptom 4</option>
+                <option value="anxiety and nervousness">Anxiety and Nervousness</option>
+                <option value="depression">Depression</option>
+                <option value="shortness of breath">Shortness of Breath</option>
+                <option value="depressive or psychotic symptoms">Depressive or Psychotic Symptoms</option>
+                <option value="sharp chest pain">Sharp Chest Pain</option>
+                <option value="dizziness">Dizziness</option>
+                <option value="insomnia">Insomnia</option>
+                <option value="abnormal involuntary movements">Abnormal Involuntary Movements</option>
+                <option value="chest tightness">Chest Tightness</option>
+                <option value="palpitations">Palpitations</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="symptom5">Symptom 5:</label>
+            <select name="symptom5" required>
+                <option value="">Select Symptom 5</option>
+                <option value="anxiety and nervousness">Anxiety and Nervousness</option>
+                <option value="depression">Depression</option>
+                <option value="shortness of breath">Shortness of Breath</option>
+                <option value="depressive or psychotic symptoms">Depressive or Psychotic Symptoms</option>
+                <option value="sharp chest pain">Sharp Chest Pain</option>
+                <option value="dizziness">Dizziness</option>
+                <option value="insomnia">Insomnia</option>
+                <option value="abnormal involuntary movements">Abnormal Involuntary Movements</option>
+                <option value="chest tightness">Chest Tightness</option>
+                <option value="palpitations">Palpitations</option>
+            </select>
+        </div>
+
+        <input type="submit" value="Check!">
+    </form>
+</div>
 {% endblock %}
