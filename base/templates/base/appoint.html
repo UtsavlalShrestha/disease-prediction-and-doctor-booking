@@ -1,14 +1,33 @@
 {% extends 'main.html' %}
-
+{%  load static %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/appoint.css" />
 <h2>Book an appointment, {{user.username}}</h2>
-<div>
-    <div>
-        
-    </div>
-    <div>
-        
-    </div>
+<div class="appoint_container_body">
+  <div class="appoint_container">
+    <form method="POST" action="">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="symptom">Select Your Symptoms:</label>
+        <select name="symptom_1" required>
+          <option value="">Select Hospital</option>
+          <option value="Patan">Patan Hospital</option>
+          <option value="Norvic">Norvic Hospital</option>
+          <option value="mediciti">Nepal Mediciti</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="doctor">Select Doctor:</label>
+        <select name="doctor" required>
+          <option value="">Select Doctor</option>
+          <option value="dr_smith">Dr. Smith</option>
+          <option value="dr_jones">Dr. Jones</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="submit-btn">Request for Appointment</button>
+      </div>
+    </form>
+  </div>
 </div>
-
 {% endblock %}
