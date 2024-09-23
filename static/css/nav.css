@@ -19,13 +19,13 @@ html, body {
   font-size: 15px;
   font-weight: bold;
   background-color: transparent;
-  border: 2px solid #2676e6;
+  border: 2px solid #3fb785;
   transition: background-color 0.2s ease, transform 0.2s ease;
-  color: #2676e6; /* Ensure color matches border */
+  color: #3fb785; /* Ensure color matches border */
 }
 
 .nav .login-b .button1:hover{
-  background-color: #2676e6;
+  background-color: #3fb785;
   color: white;
 }
 
@@ -38,15 +38,15 @@ html, body {
   cursor: pointer;
   font-size: 15px;
   font-weight: bold;
-  background-color: #2676e6;
-  border: 2px solid #2676e6;
+  background-color: #3fb785;
+  border: 2px solid #3fb785;
   color: white;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 .nav .signup-b .button2:hover,
 .nav .logout-b .button0:hover {
   background-color: white;
-  color: #2676e6;
+  color: #3fb785;
 }
 
 a {

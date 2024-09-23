@@ -49,19 +49,19 @@
 /* Left button styling (Predict!) */
 .leftb {
     background-color: transparent;
-    border: 2px solid #2676e6;
-    color: #2676e6;
+    border: 2px solid #3fb785;
+    color: green;
 }
 
 .leftb:hover {
-    background-color: #2676e6;
+    background-color: #3fb785;
     color: white;
 }
 
 /* Right button styling (Appoint!) */
 .rightb {
-    background-color: #2676e6;
-    border: 2px solid #2676e6;
+    background-color: #3fb785;
+    border: 2px solid #3fb785;
     color: white;
 }
 
@@ -107,11 +107,12 @@
 }
 
 .p2 .c1:hover, .p2 .c2:hover, .p2 .c3:hover, .p2 .c4:hover {
-    background-color: #93b5e4; 
-    border: 1px solid #2676e6; 
+    background-color: #3fb785; 
+    border: 1px solid #3fb785; 
     width: 100%;
     height: 100%;
     transition: all 0.5s ease-in-out;
+    color: aliceblue;
 }
 
 .p2 .c1:hover p, .p2 .c2:hover p, .p2 .c3:hover p, .p2 .c4:hover p {

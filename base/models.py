@@ -10,11 +10,17 @@ class Hospital(models.Model):
     def __str__(self):
         return self.name
     
-    
+class Specialitie(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    speciality = models.CharField(max_length=100)
+    speciality = models.ForeignKey(Specialitie, on_delete=models.CASCADE)
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
 
 
