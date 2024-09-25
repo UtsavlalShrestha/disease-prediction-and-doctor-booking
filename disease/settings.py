@@ -57,7 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR/'templates'
+            BASE_DIR/ 'templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -141,3 +141,15 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+DEFAULT_FROM_EMAIL = 'disease.panel@gmail.com'
+EMAIL_HOST_USER = 'disease.panel@gmail.com'
+EMAIL_HOST_PASSWORD = 'uuvz gswd otzb hhzl'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+PASSWORD_RESET_TIMEOUT = 14400 #TOKEN EXPIRATION KATI BELA
+

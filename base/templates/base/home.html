@@ -1,7 +1,16 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 <body class="bd">
   <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
-
+<div class="flash_msg">
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message|safe }}</li> <!-- Add |safe to render HTML content like <b> -->
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+  </div>
   <div class="homep">
     <h1>Ensuring Healthy Lifestyle</h1>
     <p>

@@ -3,6 +3,8 @@
 {% load static %}
 {% block content %}
 {% if page == 'login' %}
+
+</div>
 <link rel="stylesheet" type="text/css" href="/static/css/login_register.css">
 <div class="login_register_body">
     <form method="post" action="" class="login-form">
@@ -28,6 +30,15 @@
     </form>
 </div>
 {% else %}
+<div class="flash_msg">
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message|safe }}</li> <!-- Add |safe to render HTML content like <b> -->
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
 <link rel="stylesheet" type="text/css" href="/static/css/login_register.css">
 <div class="login_register_body">
     <div class="form-container">

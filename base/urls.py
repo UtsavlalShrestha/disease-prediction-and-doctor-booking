@@ -11,4 +11,6 @@ urlpatterns = [
     path('confirmOption/', views.confirmOption, name="confirmOption"),
     path('predict/', views.predict, name="predict"),
     path('appoint/', views.appoint, name="appoint"),
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
+
 ]
