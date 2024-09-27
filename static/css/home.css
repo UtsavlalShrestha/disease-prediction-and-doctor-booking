@@ -128,3 +128,49 @@
     padding: 70px 0px 70px 70px;
     width: 90%;
 }
+.testimonial {
+    width: 80%;
+    background-color: #f9f9f9; /* Light gray background */
+    border: 1px solid #e0e0e0; /* Light border */
+    border-radius: 12px; /* Rounded corners */
+    padding: 30px; /* Increased padding around content */
+    margin: auto; /* Increased margin for spacing */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Deeper shadow for a lifted effect */
+    transition: transform 0.3s; /* Smooth scaling on hover */
+}
+
+.testimonial:hover {
+    transform: scale(1.02); /* Slightly scale up on hover */
+}
+
+.testimonial h2 {
+    font-size: 26px; /* Slightly larger heading size */
+    color: #2c3e50; /* Darker blue-gray color for better contrast */
+    margin-bottom: 15px; /* Increased spacing below heading */
+    text-align: center; /* Center align */
+    font-family: 'Arial', sans-serif; /* Changed font for modern look */
+}
+
+.rating {
+    text-align: center; /* Center align rating */
+    font-size: 24px; /* Larger size for ratings */
+    color: #ffcc00; /* Gold color for stars */
+    margin: 10px 0; /* Spacing above and below rating */
+}
+
+.testimonial p {
+    font-size: 18px; /* Increased font size for text */
+    color: #555; /* Darker gray color for text */
+    line-height: 1.6; /* Increased line height for better readability */
+    text-align: center; /* Center align text */
+    margin: 15px 0; /* Increased spacing above and below paragraphs */
+}
+
+.testimonial strong {
+    display: block; /* Block display for name */
+    margin-top: 10px; /* Increased space above name */
+    font-size: 20px; /* Larger name size */
+    color: #34495e; /* Darker color for name */
+    text-align: center; /* Center align name */
+}
+
