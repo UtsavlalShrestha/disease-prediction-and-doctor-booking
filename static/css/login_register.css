@@ -1,8 +1,9 @@
-/* Styling the login form */
 .login_register_body{
     background-color: #e0e0e0;
+    /* background-image: url("static/images/doc6.jpg"); */
     height: 80vh;
-    
+    align-content: center;
+    /* justify-content: center; */
 }
 
 .login-form {
@@ -45,7 +46,6 @@
     color:red;
     margin: 20px;
 }
-
 
 /* Styling the Sign up form */
 .form-container {
