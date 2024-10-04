@@ -4,10 +4,12 @@ html, body {
 }
 
 .nav {
-  background-color: #ffffff;
+  background-color: transparent;
   padding: 10px;
   display: grid;
   grid-template-columns: 8fr 0.65fr 0.65fr;
+  width: 90%;
+  margin: auto;
 }
 
 .nav .login-b .button1{
@@ -18,15 +20,15 @@ html, body {
   cursor: pointer;
   font-size: 15px;
   font-weight: bold;
-  background-color: transparent;
+  background-color: #3fb785;
   border: 2px solid #3fb785;
   transition: background-color 0.2s ease, transform 0.2s ease;
-  color: #3fb785; /* Ensure color matches border */
+  color: white;
 }
 
 .nav .login-b .button1:hover{
-  background-color: #3fb785;
-  color: white;
+  background-color: #ffffff;
+  color: #3fb785; /* Ensure color matches border */;
 }
 
 .nav .signup-b .button2,
