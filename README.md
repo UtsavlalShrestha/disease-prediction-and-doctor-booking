@@ -5,4 +5,4 @@ A disease classification website based on symptoms provided by users, recommend 
 Stack used till date:
 Frontend: HTML, CSS
 Backend: Django
-Database: Postgres
+Database: PostgresSql
