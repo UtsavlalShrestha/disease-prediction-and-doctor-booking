@@ -11,6 +11,8 @@ from django.core.mail import EmailMessage, send_mail
 from .forms import CreateUserForm
 from .tokens import account_activation_token
 from django.conf import settings
+from .services.disease_prediction import get_disease_prediction
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -125,3 +127,9 @@ def predict(request):
 def appoint(request):
     context={}
     return render(request, 'base/appoint.html', context)
+
+def predict_view(request):
+    symptoms = ['mass on eyelid', 'swollen eye', 'eyelid swelling', 'eyelid lesion or rash', 'unwanted hair']
+    prediction = get_disease_prediction(symptoms)
+    context = {'prediction': prediction}
+    return render(request, 'base/Prediction.html', context)
