@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout, get_user_model
@@ -13,6 +13,8 @@ from .tokens import account_activation_token
 from django.conf import settings
 from .services.disease_prediction import get_disease_prediction
 from django.http import JsonResponse
+from .models import Doctor, Appointment
+from .forms import BookAppointmentForm
 
 
 # Create your views here.
@@ -123,13 +125,64 @@ def predict(request):
     context={}
     return render(request, 'base/predict.html', context)
 
-
-def appoint(request):
-    context={}
-    return render(request, 'base/appoint.html', context)
-
 def predict_view(request):
     symptoms = ['mass on eyelid', 'swollen eye', 'eyelid swelling', 'eyelid lesion or rash', 'unwanted hair']
     prediction = get_disease_prediction(symptoms)
     context = {'prediction': prediction}
     return render(request, 'base/Prediction.html', context)
+
+def appoint(request):
+    doctors = Doctor.objects.prefetch_related('schedules').all()
+    context = {
+        'doctors': doctors,
+    }
+    return render(request, 'base/appoint.html', context)
+
+def doctor_schedule_view(request):
+    doctors = Doctor.objects.prefetch_related('schedules').all()
+    context = {
+        'doctors': doctors,
+    }
+    return render(request, 'doctor_schedule.html', context)
+
+from itertools import groupby
+from operator import attrgetter
+from django.shortcuts import render, get_object_or_404
+
+def doctor_profile(request, pk): 
+    doctor = get_object_or_404(Doctor, pk=pk)
+    schedules = doctor.schedules.order_by('hospital', 'date', 'start_time')
+
+    grouped_schedules = [
+        (hospital, list(schedule_group)) 
+        for hospital, schedule_group in groupby(schedules, key=attrgetter('hospital'))
+    ]
+    return render(request, 'base/doctor_profile.html', {
+        'doctor': doctor,
+        'grouped_schedules': grouped_schedules,
+    })
+
+def book_appointment(request, doctor_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+    # user = request.user
+    if request.method == 'POST':
+        form = BookAppointmentForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            appointment = form.save(commit=False)
+            appointment.doctor = doctor
+            # appointment.patient = user
+            appointment.hospital = form.cleaned_data['hospital']
+            appointment.save()
+
+            return redirect('appointment_confirmation', appointment_id=appointment.id)
+    else:
+        form = BookAppointmentForm()
+
+    return render(request, 'base/book_appointment.html', {'form': form, 'doctor': doctor})
+
+
+
+def appointment_confirmation(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    return render(request, 'base/confirmation.html', {'appointment': appointment})
