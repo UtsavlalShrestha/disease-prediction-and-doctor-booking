@@ -273,7 +273,7 @@ def predict(request):
     return render(request, 'base/predict.html', context)
 
 def predict_view(request):
-    symptoms = ['mass on eyelid', 'swollen eye', 'eyelid swelling', 'eyelid lesion or rash', 'unwanted hair']
+    symptoms = request.POST.getlist('symptoms')
     prediction = get_disease_prediction(symptoms)
     context = {'prediction': prediction}
     return render(request, 'base/Prediction.html', context)
