@@ -14,6 +14,8 @@ from django.conf import settings
 from .services.disease_prediction import get_disease_prediction
 from django.http import JsonResponse
 from .models import Doctor, Appointment
+from itertools import groupby
+from operator import attrgetter
 from .forms import BookAppointmentForm
 
 
@@ -273,10 +275,20 @@ def predict(request):
     return render(request, 'base/predict.html', context)
 
 def predict_view(request):
-    symptoms = request.POST.getlist('symptoms')
-    prediction = get_disease_prediction(symptoms)
-    context = {'prediction': prediction}
-    return render(request, 'base/Prediction.html', context)
+    if request.method == 'POST':
+        selected_symptoms = [
+            request.POST.get(f'symptom{y}')
+            for y in range(1, 6)
+            if request.POST.get(f'symptom{y}')
+        ]
+
+        prediction = get_disease_prediction(selected_symptoms)
+        return render(request, 'base/Prediction.html', {
+            'prediction': prediction,
+        })
+    context = {}
+    return render(request, 'base/home.html', context)
+    
 
 def appoint(request):
     doctors = Doctor.objects.prefetch_related('schedules').all()
@@ -291,10 +303,6 @@ def doctor_schedule_view(request):
         'doctors': doctors,
     }
     return render(request, 'doctor_schedule.html', context)
-
-from itertools import groupby
-from operator import attrgetter
-from django.shortcuts import render, get_object_or_404
 
 def doctor_profile(request, pk): 
     doctor = get_object_or_404(Doctor, pk=pk)

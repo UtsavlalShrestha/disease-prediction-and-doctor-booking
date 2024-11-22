@@ -3,23 +3,20 @@
 <h2 class="predict_h2"><p>Welcome back, {{user.username}} 👋</p></h2>
 <div class="container">
   <h4>Select Your Symptoms, {{user.username}}</h4>
-  <form method="post">
-    {% csrf_token %}
+  <form method="post" action="{% url 'prediction' %}">
+    {% csrf_token %} {% for y in range %}
+    <div class="form-group">
+      <label for="symptom{{y}}">Symptom {{y}}:</label>
+      <select name="symptom{{y}}" required>
+        <option value="">Select Symptom {{y}}</option>
+        {% for x in list %}
+        <option value="{{x}}" style="color: black">{{x}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% endfor %}
 
-    {% for y in range %}
-      <div class="form-group">
-        <label for="symptom{{y}}">Symptom {{y}}:</label>
-        <select name="symptom{{y}}" required>
-          <option value="">Select Symptom {{y}}</option>
-          {% for x in list %}
-          <option value="{{x}}" style="color: black;">{{x}}</option>
-          {% endfor %}
-        </select>
-      </div>
-    {% endfor %}  
- 
-
-    <input type="submit" value="Check!"  action="{% url 'prediction' %}" >
+    <input type="submit" value="Check!" />
   </form>
 </div>
 {% endblock %}
