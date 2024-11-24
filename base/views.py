@@ -117,6 +117,10 @@ def signupUser(request):
     context = {'form': form}
     return render(request, 'base/login_register.html', context)
 
+def profile(request):
+    context= {}
+    return render(request, 'base/profile.html', context)
+
 
 def confirmOption(request):
     context={}

@@ -13,6 +13,13 @@
   </div>
 
   {% if user.is_authenticated %}
+  <div class="icon">
+    <img
+    src="{% static 'images/user-icon1.png' %}"
+    alt="Logo"
+    style="height: 35px"
+  />{{ user.username }}
+  </div>
   <div class="logout-b">
     <a href="{% url 'logout' %}"
       ><input type="submit" value="Logout" class="button0"
