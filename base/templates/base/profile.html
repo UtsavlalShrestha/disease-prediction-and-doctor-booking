@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="display: flex; width: 100%;">
+   
+    <div style="width: 30%; margin: 20px auto; background: #f8f9fa; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+
+        <div style="background:  #3fb785; color: #fff; text-align: center; padding: 20px;">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+                <div style="background: #ddd; color: #333; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: bold;">
+                    {{ user.first_name|default:"U"|slice:":1" }}{{ user.last_name|default:"S"|slice:":1" }}
+                </div>
+                <h2 style="margin: 0;">{{ user.username }}</h2>
+            </div>
+        </div>
+    
+        <div style="padding:20px; font-size:18px; display: flex; justify-content: center; align-items: center;">
+            <!-- <h3>Account Details</h3> -->
+            <p><strong>First name:</strong> {{ user.first_name }}</p>
+            <p><strong>Last name:</strong> {{ user.last_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p> 
+        </div>
+    
+    </div>
+
+
+    <div class="appointments" style="width: 65%; padding: 20px;">
+        
+
+        <div style="background: #f8f9fa; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+            <div style="background: #3fb785; height: 50px;color: #fff; text-align: center; padding: 15px; font-size: 22px; display: flex; justify-content: center; align-items: center;">
+                <h3 style="margin: 0;">Appointments</h3>
+            </div>
+
+            <table style="width: 100%; margin: 20px 0; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #ddd;">
+                        <th style="padding: 10px; text-align: left;">S.No</th>
+                        <th style="padding: 10px; text-align: left;">Hospital</th>
+                        <th style="padding: 10px; text-align: left;">Doctor</th>
+                        <th style="padding: 10px; text-align: left;">Date</th>
+                        <th style="padding: 10px; text-align: left;">Time</th>
+                        <th style="padding: 10px; text-align: left;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px;">1</td>
+                        <td style="padding: 10px;">City Hospital</td>
+                        <td style="padding: 10px;">Dr. Smith</td>
+                        <td style="padding: 10px;">2024-11-25</td>
+                        <td style="padding: 10px;">10:00 AM</td>
+                        <td style="padding: 10px;">Pending</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">2</td>
+                        <td style="padding: 10px;">Green Valley Clinic</td>
+                        <td style="padding: 10px;">Dr. Lee</td>
+                        <td style="padding: 10px;">2024-11-26</td>
+                        <td style="padding: 10px;">02:00 PM</td>
+                        <td style="padding: 10px;">Approved</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+</div>
+{% endblock %}

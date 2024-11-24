@@ -68,3 +68,9 @@ html, body {
 a {
   text-decoration: none;
 }
+
+
+.icon{
+  display: flex;
+  
+}
