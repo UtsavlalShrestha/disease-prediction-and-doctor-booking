@@ -6,43 +6,59 @@ html, body {
 .nav {
   background-color: #ffffff;
   padding: 10px;
-  display: grid;
-  grid-template-columns: 8fr 0.65fr 0.65fr;
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space logo and buttons */
+  align-items: center; /* Vertically align items */
+  position: relative; /* Ensure isolation from other styles */
+  z-index: 100;   
 }
 
-.nav .login-b .button1{
-  margin-top: 0.35vw;
-  margin-right: 1.5vw;  /* Increased space between buttons for better separation */
-  width: 6.5vw;
+.nav .logo {
+  flex: 1; /* Take up available space on the left */
+  text-align: left;
+}
+
+.nav .logo img {
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto;
+}
+
+.nav .actions {
+  display: flex; /* Group login/signup/logout buttons */
+  gap: 10px; /* Spacing between buttons */
+}
+
+.nav .login-b .button1,
+.nav .signup-b .button2,
+.nav .logout-b .button0 {
+  margin: 0;
   padding: 0.6vw;
-  cursor: pointer;
+  width: 6.5vw;
   font-size: 15px;
   font-weight: bold;
-  background-color: transparent;
-  border: 2px solid #3fb785;
+  cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
-  color: #3fb785; /* Ensure color matches border */
 }
 
-.nav .login-b .button1:hover{
+.nav .login-b .button1 {
+  background-color: transparent;
+  border: 2px solid #3fb785;
+  color: #3fb785;
+}
+
+.nav .login-b .button1:hover {
   background-color: #3fb785;
   color: white;
 }
 
 .nav .signup-b .button2,
 .nav .logout-b .button0 {
-  margin-top: 0.35vw;
-  margin-right: 1.5vw; 
-  width: 6.5vw;
-  padding: 0.6vw;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: bold;
   background-color: #3fb785;
   border: 2px solid #3fb785;
   color: white;
-  transition: background-color 0.2s ease, transform 0.2s ease;
 }
+
 .nav .signup-b .button2:hover,
 .nav .logout-b .button0:hover {
   background-color: white;
@@ -50,20 +66,5 @@ html, body {
 }
 
 a {
-  color: #f5eded;
   text-decoration: none;
 }
-
-.logo {
-  text-align: left; /* To center the logo horizontally */
-}
-
-/* Make logo responsive */
-.logo img {
-  margin-top: 10px;
-  max-width: 100%;
-  height: auto;
-}
-
-
-

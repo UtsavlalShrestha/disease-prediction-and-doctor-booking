@@ -1,22 +1,32 @@
-{% extends 'main.html' %} {% load static %} {% block content %}
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
 <link rel="stylesheet" type="text/css" href="/static/css/predict.css" />
-<h2 class="predict_h2"><p>Welcome back, {{user.username}} 👋</p></h2>
-<div class="container">
-  <h4>Select Your Symptoms, {{user.username}}</h4>
-  <form method="post" action="{% url 'prediction' %}">
-    {% csrf_token %} {% for y in range %}
-    <div class="form-group">
-      <label for="symptom{{y}}">Symptom {{y}}:</label>
-      <select name="symptom{{y}}" required>
-        <option value="">Select Symptom {{y}}</option>
-        {% for x in list %}
-        <option value="{{x}}" style="color: black">{{x}}</option>
-        {% endfor %}
-      </select>
-    </div>
-    {% endfor %}
 
-    <input type="submit" value="Check!" />
-  </form>
+<div class="predict-wrapper">
+    <h2 class="predict-header">
+        <p>Welcome back, {{ user.username }} 👋</p>
+    </h2>
+    <div class="container">
+        <h4 class="sub-header">Let's find out the disease based on your symptoms</h4>
+        <p class="description">
+            Please select up to five symptoms from the dropdowns below. This information will help us predict the most likely disease and recommend appropriate doctors or hospitals.
+        </p>
+        <form method="post" action="{% url 'prediction' %}">
+            {% csrf_token %}
+            {% for y in range %}
+            <div class="form-group">
+                <label for="symptom{{ y }}" style="text-align: left;"><strong>Symptom {{ y }}:</strong></label>
+                <select name="symptom{{ y }}" required>
+                    <option value="">Select Symptom {{ y }}</option>
+                    {% for x in list %}
+                    <option value="{{ x }}" style="color: black">{{ x }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endfor %}
+            <input type="submit" value="Predict" />
+        </form>
+    </div>
 </div>
 {% endblock %}

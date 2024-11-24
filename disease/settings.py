@@ -90,7 +90,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'disease',
-        'USER': 'user1',
+        'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '5432'
@@ -122,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
@@ -144,12 +144,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = ''
-DEFAULT_FROM_EMAIL = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 
-EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+DEFAULT_FROM_EMAIL = 'disease.panel@gmail.com'
+EMAIL_HOST_USER = 'disease.panel@gmail.com'
+EMAIL_HOST_PASSWORD = 'uuvz gswd otzb hhzl'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True# No selected code was provided, so I will suggest an improvement to the existing code
 
 PASSWORD_RESET_TIMEOUT = 14400 #TOKEN EXPIRATION KATI BELA
 

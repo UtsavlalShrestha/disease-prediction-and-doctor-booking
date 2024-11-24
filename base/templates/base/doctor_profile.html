@@ -6,22 +6,25 @@
 
 <div class="container my-5">
     <!-- Profile Card -->
-    <div class="card mb-4">
+    <div class="card mb-4" style="border: none;">
         <div class="card-body">
-            <div class="row align-items-start">
-                <div class="col-md-3 text-center">
-                    <img src="{{ doctor.profile_picture.url }}" alt="Dr. {{ doctor.name }}" 
-                        class="img-fluid rounded-circle mb-2" 
-                        style="width: 150px; height: 150px; border: 3px solid #000000;">
-                    <h5 class="mt-2">Dr. {{ doctor.name }}</h5>
-                    <p class="text-muted mb-1">{{ doctor.speciality }}</p>
-                    <p><strong>NMC Number:</strong> {{ doctor.nmc_number }}</p>
-                    <p>Experience: {{ doctor.experience }} years</p>
+            <div class="row align-items-center">
+                <!-- Doctor's Picture -->
+                <div class="col-md-3">
+                    <img src="{{ doctor.profile_picture.url }}" alt="Dr. {{ doctor.name }}"
+                         class="img-fluid mb-2"
+                         style="width: 350px; height: 350px; object-fit: cover; border: 3px solid #000000;">
                 </div>
-                
+
                 <div class="col-md-9">
-                    <h5>Profile</h5>
-                    <p>{{ doctor.description }}</p>
+                    <h2 class="mb-3" style="text-align: left;">Dr. {{ doctor.name }}</h2>
+                    <div class="mb-4">
+                        <p><strong>Speciality:</strong> <span class="text-muted">{{ doctor.speciality }}</span></p>
+                        <p><strong>NMC Number:</strong> <span class="text-muted">{{ doctor.nmc_number }}</span></p>
+                        <p><strong>Experience:</strong> <span class="text-muted">{{ doctor.experience }} years</span></p>
+                    </div>
+                    <h4 class="mb-2">Profile</h4>
+                    <p class="text-justify text-muted">{{ doctor.description }}</p>
                 </div>
             </div>
         </div>
@@ -59,10 +62,12 @@
             {% endif %}
         </div>
     </div>
+</div>
+
 
     <!-- Book Appointment Button -->
-    <div class="text-center mt-4">
+    <!-- <div class="text-center mt-4">
         <a href="{% url 'book_appointment' doctor.id %}" class="btn btn-danger mt-3">Book an Appointment →</a>
-    </div>
+    </div> -->
 </div>
 {% endblock %}

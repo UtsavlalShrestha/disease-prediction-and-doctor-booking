@@ -22,6 +22,7 @@ class Specialitie(models.Model):
 class Doctor(models.Model):
     name = models.CharField(max_length=100)
     speciality = models.ForeignKey(Specialitie, on_delete=models.CASCADE)
+    experience = models.IntegerField(null=True)
     hospitals = models.ManyToManyField(Hospital)
     description = models.TextField(default="")
     nmc_number = models.IntegerField(default=0)
