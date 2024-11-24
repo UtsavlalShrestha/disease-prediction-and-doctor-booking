@@ -13,10 +13,12 @@ from .tokens import account_activation_token
 from django.conf import settings
 from .services.disease_prediction import get_disease_prediction
 from django.http import JsonResponse
-from .models import Doctor, Appointment
+from .models import Doctor, Appointment, Schedule
 from itertools import groupby
 from operator import attrgetter
 from .forms import BookAppointmentForm
+from django.utils import timezone
+from datetime import timedelta, date
 
 
 # Create your views here.
@@ -292,10 +294,29 @@ def predict_view(request):
 
 def appoint(request):
     doctors = Doctor.objects.prefetch_related('schedules').all()
+    current_time = timezone.now()
+    cutoff_date = current_time.date() + timedelta(days=3)
+    for doctor in doctors:
+        schedules = doctor.schedules.filter(
+            date__range=(current_time.date(), cutoff_date)
+        ).exclude(
+            date=current_time.date(),
+            end_time__lte=current_time.time()
+        ).order_by('hospital', 'date', 'start_time')
+
+        grouped_schedules = {}
+        for hospital, hospital_group in groupby(schedules, key=lambda x: x.hospital):
+            grouped_schedules[hospital] = {}
+            for date, date_group in groupby(hospital_group, key=lambda x: x.date):
+                grouped_schedules[hospital][date] = list(date_group)
+        doctor.grouped_schedules = grouped_schedules
+
     context = {
         'doctors': doctors,
     }
     return render(request, 'base/appoint.html', context)
+
+
 
 def doctor_schedule_view(request):
     doctors = Doctor.objects.prefetch_related('schedules').all()
@@ -304,28 +325,31 @@ def doctor_schedule_view(request):
     }
     return render(request, 'doctor_schedule.html', context)
 
-def doctor_profile(request, pk): 
+def doctor_profile(request, pk):
     doctor = get_object_or_404(Doctor, pk=pk)
-    schedules = doctor.schedules.order_by('hospital', 'date', 'start_time')
+
+    schedules = doctor.schedules.filter(date__gte=date.today()).order_by('hospital', 'date', 'start_time')
 
     grouped_schedules = [
         (hospital, list(schedule_group)) 
         for hospital, schedule_group in groupby(schedules, key=attrgetter('hospital'))
     ]
+    
     return render(request, 'base/doctor_profile.html', {
         'doctor': doctor,
         'grouped_schedules': grouped_schedules,
-    })
+    }) 
 
-def book_appointment(request, doctor_id):
-    doctor = get_object_or_404(Doctor, id=doctor_id)
+def book_appointment(request, schedule_id):
+    # doctor = get_object_or_404(Doctor, id=doctor_id)
+    schedule = get_object_or_404(Schedule, id=schedule_id)
     # user = request.user
     if request.method == 'POST':
         form = BookAppointmentForm(request.POST)
         if form.is_valid():
             print(form.cleaned_data)
             appointment = form.save(commit=False)
-            appointment.doctor = doctor
+            appointment.doctor = schedule.doctor
             # appointment.patient = user
             appointment.hospital = form.cleaned_data['hospital']
             appointment.save()
@@ -334,9 +358,7 @@ def book_appointment(request, doctor_id):
     else:
         form = BookAppointmentForm()
 
-    return render(request, 'base/book_appointment.html', {'form': form, 'doctor': doctor})
-
-
+    return render(request, 'base/book_appointment.html', {'form': form, 'doctor': schedule.doctor, 'schedule': schedule})
 
 def appointment_confirmation(request, appointment_id):
     appointment = get_object_or_404(Appointment, id=appointment_id)

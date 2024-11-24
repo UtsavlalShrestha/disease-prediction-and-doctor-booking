@@ -1,0 +1,30 @@
+* {
+    border-radius: 0;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.border-success {
+    border-color: #3fb785 ;
+}
+.bg-light {
+    background-color: #f9f9f9 ;
+}
+.text-primary {
+    color: #3fb785 ;
+}
+
+.btn-success {
+    background-color: #3fb785 ;
+    border-color: #3fb785 ;
+}
+.btn-success:hover {
+    background-color: #34a16f ;
+}
+
+.homebutton{
+    border-radius: 0 !important;
+}

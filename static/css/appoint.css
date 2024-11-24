@@ -1,57 +1,46 @@
-.appoint_container_body{
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+/* Reset all border radius */
+* {
+    border-radius: 0 !important;
 }
 
-.appoint_container{
-    width: 30vw;
-    
+/* Primary color */
+.text-primary {
+    color: #3fb785 !important;
+}
+.bg-success {
+    background-color: #3fb785 !important;
+}
+.btn-success {
+    background-color: #3fb785 !important;
+    border-color: #3fb785 !important;
+}
+.btn-success:hover {
+    background-color: #34a16f !important;
 }
 
-.form-container {
-    max-width: 500px;
-    margin: 20px auto;
-    background-color: #ffffff;
-    padding: 20px;
-    box-shadow: 0 14px 28px rgba(120, 120, 120, 0.1);
-}
-h2 {
-    text-align: center;
-    color: #333;
-    font-size: 20px;
-}
-.form-group {
-    margin-bottom: 15px;
-}
-.form-group label {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 5px;
-    display: block;
-}
-.form-group select{
-    width: 100%;
-    padding: 12px;
-    margin: 0px 0 10px 0;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    font-size: 16px;
-    color: #555;
-}
-.submit-btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
+/* General card styling */
+.card {
     border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.submit-btn:hover {
-    background-color: #45a049;
+
+/* Table styling */
+.table th, .table td {
+    vertical-align: middle;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+.table-bordered th, .table-bordered td {
+    border-color: #3fb785;
+}
+
+/* Button styling */
+.btn-outline-success {
+    color: #3fb785 !important;
+    border-color: #3fb785 !important;
+}
+.btn-outline-success:hover {
+    background-color: #3fb785 !important;
+    color: white !important;
 }

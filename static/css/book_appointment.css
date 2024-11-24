@@ -1,0 +1,34 @@
+* {
+    border-radius: 0;
+}
+
+.text-primary {
+    color: #3fb785 ;
+}
+.btn-success {
+    background-color: #3fb785 ;
+    border-color: #3fb785 ;
+}
+.btn-success:hover {
+    background-color: #34a16f ;
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    box-shadow: none;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline-secondary:hover {
+    background-color: #ddd !important;
+    color: #000 !important;
+}
+
+button, a.btn {
+    text-transform: uppercase;
+    font-weight: bold;
+}
