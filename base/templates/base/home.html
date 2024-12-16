@@ -1,97 +1,129 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 <body class="bd">
   <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
-<div class="flash_msg">
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-            <li>{{ message|safe }}</li> <!-- Add |safe to render HTML content like <b> -->
-        {% endfor %}
-    </ul>
-    {% endif %}
-</div>
-  </div>
-  <div class="homep">
-    <h1>Ensuring Healthy Lifestyle</h1>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Ensuring Healthy Lifestyle</h1>
+      <p>
+        Discover tailored healthcare services, personalized recommendations, and
+        advanced medical predictions for a healthier you.
+      </p>
+      <div class="button-group">
+        {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'predict' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn predict-btn">Predict!</button>
+        </form>
+        <form method="POST" action="{% url 'appoint' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn appoint-btn">Appoint!</button>
+        </form>
+        {% else %}
+        <form method="POST" action="{% url 'confirmOption' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn predict-btn">Predict!</button>
+        </form>
+        <form method="POST" action="{% url 'confirmOption' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn appoint-btn">Appoint!</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section class="about">
+    <h2>About Us</h2>
     <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi iure
-      harum accusantium consequatur doloribus accusamus culpa quidem, aperiam
-      molestias, enim consequuntur commodi quisquam. Delectus molestiae et
-      laboriosam explicabo earum illo iste modi dolor, exercitationem quia sit
-      quidem expedita vel nam iusto! Amet eum, id tempora possimus quidem
-      corporis molestiae illo!
+      At Dis-Ease, we strive to provide the best healthcare services through
+      innovation, compassion, and a commitment to excellence. Our goal is to
+      empower individuals to take control of their health with the help of
+      modern technology and expert medical advice.
     </p>
-  </div>
-  <div class="btns">
-    {% if user.is_authenticated %}
-    <div class="button-group">
-        <form method="POST" action="{% url 'predict' %}" class="btns_after_auth"> 
-            {% csrf_token %}
-            <button type="submit" class="leftb">Predict!</button>
-        </form>
-        <form method="POST" action="{% url 'appoint' %}" class="btns_after_auth">
-            {% csrf_token %}
-            <button type="submit" class="rightb">Appoint!</button>
-        </form>
-    </div>
-    {% else %}
-    <div class="button-group">
-        <form method="POST" action="{% url 'confirmOption' %}">
-            {% csrf_token %}
-            <button type="submit" class="leftb">Predict!</button>
-        </form>
-        <form method="POST" action="{% url 'confirmOption' %}">
-            {% csrf_token %}
-            <button type="submit" class="rightb">Appoint!</button>
-        </form>
-    </div>
-    {% endif %}
-</div>
+  </section>
 
+  <!-- Services Section -->
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="services-container">
+      <div class="service-card">
+        <h3>Consultation</h3>
+        <p>
+          Get expert medical advice tailored to your unique health concerns.
+        </p>
+      </div>
+      <div class="service-card">
+        <h3>Prediction</h3>
+        <p>Leverage AI-powered tools to predict potential health risks.</p>
+      </div>
+      <div class="service-card">
+        <h3>Hospital Booking</h3>
+        <p>Book appointments at top-rated hospitals with ease.</p>
+      </div>
+      <div class="service-card">
+        <h3>Doctor Recommendation</h3>
+        <p>Receive personalized doctor recommendations for specialized care.</p>
+      </div>
+    </div>
+  </section>
 
-  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <!-- Why Choose Us Section -->
+  <section class="why-choose-us">
+    <h2>Why Choose Us?</h2>
+    <div class="choose-container">
+      <div class="choose-item">
+        <h3>Advanced Technology</h3>
+        <p>
+          Our platform utilizes the latest advancements in AI and medical tech
+          to provide accurate predictions and personalized care.
+        </p>
+      </div>
+      <div class="choose-item">
+        <h3>Expert Team</h3>
+        <p>
+          We work with experienced doctors and healthcare professionals
+          dedicated to your well-being.
+        </p>
+      </div>
+      <div class="choose-item">
+        <h3>Comprehensive Services</h3>
+        <p>
+          From consultations to hospital bookings, we offer a one-stop solution
+          for all your healthcare needs.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  <div class="mid">
-    <div class="p1">
-      <h2>Services We Offer!</h2>
-    </div>
-    <div class="p2">
-      <div class="c1">
-        <h2>Consultation</h2>
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial-container">
+      <div class="testimonial">
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum quo
-          sed quidem tempora. Sed ducimus quia eveniet illo nesciunt neque cum
-          nam provident modi. Dignissimos nam incidunt culpa possimus vitae.
+          "Dis-Ease helped me book a specialist in no time! The service was
+          fast, reliable, and user-friendly."
         </p>
+        <h4>- Sarah W.</h4>
       </div>
-      <div class="c2">
-        <h2>Prediction</h2>
+      <div class="testimonial">
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum quo
-          sed quidem tempora. Sed ducimus quia eveniet illo nesciunt neque cum
-          nam provident modi. Dignissimos nam incidunt culpa possimus vitae.
+          "The prediction tool was surprisingly accurate and helped me catch a
+          potential issue early. Highly recommend!"
         </p>
+        <h4>- John D.</h4>
       </div>
-      <div class="c3">
-        <h2>Hospital Booking</h2>
+      <div class="testimonial">
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum quo
-          sed quidem tempora. Sed ducimus quia eveniet illo nesciunt neque cum
-          nam provident modi. Dignissimos nam incidunt culpa possimus vitae.
+          "Thanks to their doctor recommendations, I found the perfect
+          specialist for my needs. Fantastic service!"
         </p>
-      </div>
-      <div class="c4">
-        <h2>Doctor Recommendation</h2>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum quo
-          sed quidem tempora. Sed ducimus quia eveniet illo nesciunt neque cum
-          nam provident modi. Dignissimos nam incidunt culpa possimus vitae.
-        </p>
+        <h4>- Emily R.</h4>
       </div>
     </div>
-    <div class="doc">
-      <img src="{% static 'images/doc5.jpg' %}" />
-    </div>
-  </div>
+  </section>
 </body>
 {% endblock content %}

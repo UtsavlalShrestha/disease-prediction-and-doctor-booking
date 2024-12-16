@@ -1,0 +1,60 @@
+{% extends 'base_generic.html' %} {% load static %} {% block content %}
+
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/static/css_admin/doctor_kanban.css"
+/>
+
+<div class="container mt-5">
+  <h1 class="mb-4 text-center">Doctor List</h1>
+
+  <div class="d-flex justify-content-end">
+    <a
+      href="{% url 'doctor_add' %}"
+      class="btn btn-primary mb-3 rounded-pill shadow-sm"
+      style="
+        background-color: #0e3e6e;
+        border-color: #0e3e6e;
+        font-weight: bold;
+      "
+    >
+      + Add New Doctor
+    </a>
+  </div>
+
+  <div class="kanban-board">
+    {% if doctors %} {% for doctor in doctors %}
+    <a
+      href="{% url 'doctor_edit' doctor.pk %}"
+      class="kanban-card"
+      style="text-decoration: none; color: inherit"
+    >
+      <div class="card-content">
+        {% if doctor.profile_picture %}
+        <img
+          src="{{ doctor.profile_picture.url }}"
+          alt="{{ doctor.name }}"
+          class="profile-picture"
+        />
+        {% else %}
+        <img
+          src="{% static 'images/default-profile.png' %}"
+          alt="Default Profile"
+          class="profile-picture"
+        />
+        {% endif %}
+        <h5>{{ doctor.name }}</h5>
+        <p><strong>Specialty:</strong> {{ doctor.speciality }}</p>
+        <p><strong>Experience:</strong> {{ doctor.experience }} years</p>
+      </div>
+    </a>
+    {% endfor %} {% else %}
+    <div class="text-center text-muted">
+      <p>No Doctors Available</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

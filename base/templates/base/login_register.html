@@ -1,78 +1,80 @@
-{% extends 'main.html' %}
+{% extends 'main.html' %} {% load static %} {% block content %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/login_register.css' %}"
+/>
 
-{% load static %}
-{% block content %}
-{% if page == 'login' %}
-
-</div>
-<link rel="stylesheet" type="text/css" href="/static/css/login_register.css">
-<div class="login_register_body">
-    <form method="post" action="" class="login-form">
-        {% csrf_token %}
-        <br>
-        <label for="username">Username:</label><br>
-        <input type="text" name="username" placeholder="Username">
-        <br>
-        <label for="password">Password:</label><br>
-        <input type="password" name="password" placeholder="Password">
-        <br>
-        {% if messages %}
-        <div>
-            <!-- {% for message in messages %} -->
-            <div class="login-error">
-                {{ message }}
-            </div>
-            <!-- {% endfor %} -->
-        </div>
-        {% endif %}
-        <input type="submit" value="Login">
-
-    </form>
-</div>
-{% else %}
-<div class="flash_msg">
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-            <li>{{ message|safe }}</li> <!-- Add |safe to render HTML content like <b> -->
-        {% endfor %}
-    </ul>
-    {% endif %}
-</div>
-<link rel="stylesheet" type="text/css" href="/static/css/login_register.css">
-<div class="login_register_body">
-    <div class="form-container">
-        <form method="post" action="">
-            {% csrf_token %}
-            
-            <!-- Username Field -->
-            <div class="form-group">
-                <label for="username">Username:</label>
-                {{ form.username }}
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email address:</label>
-                {{ form.email }}
-            </div>
-        
-            <div class="form-group">
-                <label for="password">Password:</label>
-                {{ form.password1 }}
-                <ul>
-                    <li>Your password must contain at least 8 characters.</li>
-                    <li>Your password can’t be entirely numeric.</li>       
-                </ul>
-            </div>
-        
-            <div class="form-group">
-                <label for="password_confirmation">Password confirmation:</label>
-                {{ form.password2 }}
-            </div>
-            
-            <input type="submit" value="Signup" class="btn">
-        </form>
+<div class="auth-page">
+  <div class="auth-container">
+    <div class="auth-logo">
+      <img src="{% static 'images/logo.png' %}" alt="Dis-Ease Logo" />
     </div>
+
+    <div class="auth-box">
+      {% if page == 'login' %}
+      <h1 class="auth-title">Login</h1>
+      <form method="post" action="" class="auth-form">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter your username"
+          class="auth-input"
+        />
+
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+          class="auth-input"
+        />
+
+        {% if messages %}
+        <div class="auth-error">{{ messages|first }}</div>
+        {% endif %}
+
+        <input type="submit" value="Login" class="auth-button" />
+      </form>
+      <p class="auth-toggle">
+        Don't have an account? <a href="/signup">Sign up here</a>
+      </p>
+      {% else %}
+      <h1 class="auth-title">Sign Up</h1>
+      <form method="post" action="" class="auth-form">
+        {% csrf_token %}
+
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" class="auth-input" />
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" class="auth-input" />
+
+        <label for="username">Username:</label>
+        <input type="text" name="username" class="auth-input" />
+
+        <label for="email">Email address:</label>
+        <input type="email" name="email" class="auth-input" />
+
+        <label for="password">Password:</label>
+        <input type="password" name="password1" class="auth-input" />
+        <ul class="auth-guidelines">
+          <li>Your password must contain at least 8 characters.</li>
+          <li>Your password can’t be entirely numeric.</li>
+        </ul>
+
+        <label for="password_confirmation">Password confirmation:</label>
+        <input type="password" name="password2" class="auth-input" />
+
+        <input type="submit" value="Sign Up" class="auth-button" />
+      </form>
+      <p class="auth-toggle">
+        Already have an account? <a href="/login">Login here</a>
+      </p>
+      {% endif %}
+    </div>
+  </div>
 </div>
-{% endif %}
 {% endblock content %}

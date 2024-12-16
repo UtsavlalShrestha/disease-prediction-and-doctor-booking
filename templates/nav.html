@@ -1,6 +1,6 @@
 {% load static %}
+<link rel="stylesheet" type="text/css" href="/static/css/nav.css" />
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}" />
 <div class="nav">
   <div class="logo">
     <a href="/">
@@ -12,31 +12,26 @@
     </a>
   </div>
 
-  {% if user.is_authenticated %}
-  <div class="icon">
-    <img
-    src="{% static 'images/user-icon1.png' %}"
-    alt="Logo"
-    style="height: 35px"
-  />{{ user.username }}
+  <div class="nav-links">
+    {% if user.is_authenticated %}
+    <div class="user-profile">
+      <a href="{% url 'profile' %}" class="nav-item profile-link">
+        <img
+          src="{% static 'images/user-icon1.png' %}"
+          alt="User Icon"
+          style="height: 35px"
+        />
+        <span>{{ user.username }}</span>
+      </a>
+    </div>
+    <div class="logout">
+      <a href="{% url 'logout' %}" class="nav-item logout-btn">Logout</a>
+    </div>
+    {% else %}
+    <div class="auth-buttons">
+      <a href="{% url 'login' %}" class="nav-item login-btn">Login</a>
+      <a href="{% url 'signup' %}" class="nav-item signup-btn">Sign Up</a>
+    </div>
+    {% endif %}
   </div>
-  <div class="logout-b">
-    <a href="{% url 'logout' %}"
-      ><input type="submit" value="Logout" class="button0"
-    /></a>
-  </div>
-  {% else %}
-  <div class="login-b">
-    <a href="{% url 'login' %}"
-      ><input type="submit" value="Login" class="button1"
-    /></a>
-  </div>
-  &nbsp;
-  &nbsp;
-  <div class="signup-b">
-    <a href="{% url 'signup' %}"
-      ><input type="submit" value="Sign Up" class="button2"
-    /></a>
-  </div>
-  {% endif %}
 </div>

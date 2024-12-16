@@ -57,7 +57,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR/ 'templates'
+            BASE_DIR/ 'templates',
+            BASE_DIR / 'base/templates/hospital_admin',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -128,14 +129,22 @@ USE_I18N = True
 
 USE_TZ = True
 
+# login redirect for Hostpital admin
+LOGIN_REDIRECT_URL = '/hospital/dashboard/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
+# ]
+STATIC_URL = '/static/'  # URL for serving static files
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / 'static',  # Add any custom static directories
 ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

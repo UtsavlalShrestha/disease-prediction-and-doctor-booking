@@ -1,72 +1,62 @@
-{% extends 'main.html' %}
-{% load static %}
+{% extends 'main.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
 
-{% block content %}
-<div class="container" style="display: flex; width: 100%;">
-   
-    <div style="width: 30%; margin: 20px auto; background: #f8f9fa; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
 
-        <div style="background:  #3fb785; color: #fff; text-align: center; padding: 20px;">
-            <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
-                <div style="background: #ddd; color: #333; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: bold;">
-                    {{ user.first_name|default:"U"|slice:":1" }}{{ user.last_name|default:"S"|slice:":1" }}
-                </div>
-                <h2 style="margin: 0;">{{ user.username }}</h2>
-            </div>
-        </div>
-    
-        <div style="padding:20px; font-size:18px; display: flex; justify-content: center; align-items: center;">
-            <!-- <h3>Account Details</h3> -->
-            <p><strong>First name:</strong> {{ user.first_name }}</p>
-            <p><strong>Last name:</strong> {{ user.last_name }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p> 
-        </div>
-    
+<div class="profile-container">
+  <!-- Profile Card -->
+  <div class="user-card">
+    <div class="user-avatar">
+      <span>{{ user.first_name|default:"U"|slice:":1" }}{{ user.last_name|default:"S"|slice:":1" }}</span>
     </div>
-
-
-    <div class="appointments" style="width: 65%; padding: 20px;">
-        
-
-        <div style="background: #f8f9fa; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
-            <div style="background: #3fb785; height: 50px;color: #fff; text-align: center; padding: 15px; font-size: 22px; display: flex; justify-content: center; align-items: center;">
-                <h3 style="margin: 0;">Appointments</h3>
-            </div>
-
-            <table style="width: 100%; margin: 20px 0; border-collapse: collapse;">
-                <thead>
-                    <tr style="background-color: #ddd;">
-                        <th style="padding: 10px; text-align: left;">S.No</th>
-                        <th style="padding: 10px; text-align: left;">Hospital</th>
-                        <th style="padding: 10px; text-align: left;">Doctor</th>
-                        <th style="padding: 10px; text-align: left;">Date</th>
-                        <th style="padding: 10px; text-align: left;">Time</th>
-                        <th style="padding: 10px; text-align: left;">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="padding: 10px;">1</td>
-                        <td style="padding: 10px;">City Hospital</td>
-                        <td style="padding: 10px;">Dr. Smith</td>
-                        <td style="padding: 10px;">2024-11-25</td>
-                        <td style="padding: 10px;">10:00 AM</td>
-                        <td style="padding: 10px;">Pending</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px;">2</td>
-                        <td style="padding: 10px;">Green Valley Clinic</td>
-                        <td style="padding: 10px;">Dr. Lee</td>
-                        <td style="padding: 10px;">2024-11-26</td>
-                        <td style="padding: 10px;">02:00 PM</td>
-                        <td style="padding: 10px;">Approved</td>
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
+    <div class="user-info">
+      <h2>{{ user.username }}</h2>
+      <p><strong>First Name:</strong> {{ patient.user.first_name }}</p>
+      <p><strong>Last Name:</strong> {{ patient.user.last_name }}</p>
+      <p><strong>Email:</strong> {{ patient.user.email }}</p>
+      <p><strong>Date of Birth:</strong> {{ patient.dob|date:"d M Y" }}</p>
+      <p><strong>Gender:</strong> {{ patient.gender }}</p>
+      <p><strong>Address:</strong> {{ patient.address }}</p>
+      <p><strong>Phone:</strong> {{ patient.phone_number }}</p>
     </div>
+  </div>
 
+  <!-- Appointments Card -->
+  <div class="appointments-card">
+    <h3 class="appointments-title">Appointments</h3>
+    <table class="appointments-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Hospital</th>
+          <th>Doctor</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if appointments %}
+          {% for appointment in appointments %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ appointment.hospital.name }}</td>
+              <td>{{ appointment.doctor.name }}</td>
+              <td>{{ appointment.date }}</td>
+              <td>{{ appointment.time }}</td>
+              <td class="{% if appointment.is_approved %}status-approved{% else %}status-pending{% endif %}">
+                {% if appointment.is_approved %} Approved {% else %} Pending {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="6">No appointments found.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
 </div>
+
+
 {% endblock %}

@@ -1,94 +1,96 @@
-/* Styling the login form */
-.login_register_body{
-    background-color: #e0e0e0;
-    height: 80vh;
-    
+/* Body Styling for Authentication Pages */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #fff;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
 }
 
-.login-form {
-    width: 300px;
-    margin: 0px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.auth-container {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    width: 400px;
+    text-align: center;
 }
 
-.login-form label{
-    font-size: large;
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-.login-form input[type="text"],
-.login-form input[type="password"] {
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-
+.auth-logo img {
+    width: 100px;
+    margin-bottom: 20px;
 }
 
-.login-form input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
+.auth-title {
+    color: #3fb785;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-input {
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.auth-input:focus {
+    outline: none;
+    border-color: #3fb785;
+    box-shadow: 0 0 5px rgba(63, 183, 133, 0.5);
+}
+
+.auth-button {
+    padding: 12px;
+    border-radius: 30px;
     border: none;
-    cursor: pointer;
-}
-.login-form input[type="submit"]:hover {
-    background-color: #45a049; 
-    
-}
-
-.login-error{
-    font-size: small;
-    color:red;
-    margin: 20px;
-}
-
-
-/* Styling the Sign up form */
-.form-container {
-    width: 450px;
-    margin: 0px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Styling the labels */
-.form-container label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-/* Styling the input fields */
-.form-container input[type="text"],
-.form-container input[type="password"],
-.form-container input[type="email"] {
-    width: 90%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-}
-.form-container input[type="password"]{
-    margin-bottom: 0px;
-
-}
-
-/* Styling the submit button */
-.form-container input[type="submit"].btn {
-    background-color: #4CAF50;
+    background-color: #3fb785;
     color: white;
-    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.auth-button:hover {
+    background-color: #2a9c6f;
+}
+
+.auth-toggle {
     margin-top: 15px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
-.form-container input[type="submit"].btn:hover {
-    background-color: #45a049;
+.auth-toggle a {
+    color: #3fb785;
+    text-decoration: none;
+}
+
+.auth-toggle a:hover {
+    text-decoration: underline;
+}
+
+.auth-error {
+    color: #d9534f;
+    background: #f2dede;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.auth-guidelines {
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: -10px;
+    text-align: left;
 }

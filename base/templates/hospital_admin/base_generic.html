@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/css_admin/base_generic.css"
+    />
+    <title>{{ hospital.name }} Dashboard</title>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="p-3">
+        <a href="{% url 'hospital_dashboard' %}"
+          ><h3>{{ hospital.name }} Dashboard</h3></a
+        >
+
+        <a href="{% url 'doctor_list' %}"
+          ><i class="fas fa-user-md"></i> Doctors</a
+        >
+        <a href="{% url 'schedule_list' %}"
+          ><i class="fas fa-calendar-alt"></i> Schedules</a
+        >
+        <a href="{% url 'appointment_list' %}"
+          ><i class="fas fa-calendar-check"></i> Appointments</a
+        >
+        <a href="{% url 'approved_appointments' %}">
+          <i class="fas fa-history"></i> Approved Appointments
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand fw-bold" href="#">
+          {{ hospital.name }} Dashboard</a
+        >
+        <div class="ms-auto d-flex align-items-center">
+          <div class="profile-info pe-3">
+            <i class="fas fa-user-circle me-2"></i>
+            {{ user.username }}
+          </div>
+        </div>
+      </nav>
+
+      <!-- Dynamic Content Block -->
+      <div class="container">{% block content %} {% endblock %}</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

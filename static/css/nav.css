@@ -1,76 +1,109 @@
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
 .nav {
-  background-color: #ffffff;
-  padding: 10px;
-  display: flex; /* Use flexbox for layout */
-  justify-content: space-between; /* Space logo and buttons */
-  align-items: center; /* Vertically align items */
-  position: relative; /* Ensure isolation from other styles */
-  z-index: 100;   
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  padding: 15px 30px;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.nav .logo {
-  flex: 1; /* Take up available space on the left */
-  text-align: left;
+/* Logo Styling */
+.logo img {
+  max-height: 60px;
 }
 
-.nav .logo img {
-  margin-top: 10px;
-  max-width: 100%;
-  height: auto;
+/* Nav Links Styling */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.nav .actions {
-  display: flex; /* Group login/signup/logout buttons */
-  gap: 10px; /* Spacing between buttons */
+.nav-item {
+  text-decoration: none;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
-.nav .login-b .button1,
-.nav .signup-b .button2,
-.nav .logout-b .button0 {
-  margin: 0;
-  padding: 0.6vw;
-  width: 6.5vw;
-  font-size: 15px;
-  font-weight: bold;
+.nav-item:hover {
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Logout Button */
+.logout-btn {
+  background-color: #3fb785;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.nav .login-b .button1 {
-  background-color: transparent;
-  border: 2px solid #3fb785;
-  color: #3fb785;
+.logout-btn:hover {
+  background-color: #2a7e6d;
+  transform: scale(1.1);
 }
 
-.nav .login-b .button1:hover {
+/* User Profile Styling */
+.profile-link img {
+  height: 30px;
+  border-radius: 50%;
+}
+
+.profile-link span {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.login-btn {
   background-color: #3fb785;
   color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.nav .signup-b .button2,
-.nav .logout-b .button0 {
-  background-color: #3fb785;
-  border: 2px solid #3fb785;
-  color: white;
-}
-
-.nav .signup-b .button2:hover,
-.nav .logout-b .button0:hover {
+.signup-btn {
   background-color: white;
   color: #3fb785;
+  border: 1px solid #3fb785;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-a {
-  text-decoration: none;
+.login-btn:hover {
+  background-color: white;
+  color: #3fb785;
+  transform: scale(1.1);
 }
 
-
-.icon{
-  display: flex;
-  
+.signup-btn:hover {
+  background-color: #3fb785;
+  color: white;
+  transform: scale(1.1);
 }

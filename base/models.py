@@ -5,6 +5,7 @@ from django.utils import timezone
 
 
 class Hospital(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
@@ -40,7 +41,7 @@ class Patient(models.Model):
     doctors = models.ManyToManyField('Doctor', related_name='patients')
 
     def __str__(self):
-        return self.name
+        return f"{self.user.first_name}{self.user.last_name}"
 
 
 class Schedule(models.Model):
@@ -68,13 +69,15 @@ class Schedule(models.Model):
             raise ValidationError("This schedule overlaps with an existing schedule.")
 
     def __str__(self):
-        return f"{self.doctor} - {self.hospital} on {self.date} from {self.start_time} to {self.end_time}"
+        return f"{self.doctor}"
 
 class Appointment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE, default=1)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True)
     date = models.DateField()
     time = models.TimeField(default='12:00:00')
+    is_approved = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Appointment with {self.doctor.name} - {self.hospital}  on {self.date} at {self.time}"

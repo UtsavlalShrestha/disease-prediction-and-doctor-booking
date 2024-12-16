@@ -1,0 +1,95 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<!-- Include Bootstrap and Custom CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/patient_form.css' %}"
+/>
+
+<div class="container my-5">
+  <!-- Header Section -->
+  <div class="text-center mb-4">
+    <h2 class="fw-bold text-success">Complete Your Profile</h2>
+    <p class="text-muted">
+      Please provide your information to complete the profile and proceed with
+      booking your appointment.
+    </p>
+  </div>
+
+  <!-- Form Card -->
+  <div
+    class="card shadow-lg border-0 mx-auto"
+    style="max-width: 650px; border-radius: 15px"
+  >
+    <div class="card-body">
+      <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+
+        <!-- Form Fields -->
+        <div class="row g-3">
+          <!-- Date of Birth -->
+          <div class="col-md-6">
+            <label for="id_dob" class="form-label fw-semibold"
+              >Date of Birth</label
+            >
+            {{ form.dob }}
+          </div>
+
+          <!-- Gender (Radio Buttons) -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Gender</label>
+            <div>
+              {% for radio in form.gender %}
+              <div class="form-check">
+                {{ radio.tag }}
+                <label for="{{ radio.id_for_label }}" class="form-check-label">
+                  {{ radio.choice_label }}
+                </label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="row mt-3">
+          <div class="col-12">
+            <label for="id_address" class="form-label fw-semibold"
+              >Address</label
+            >
+            {{ form.address }}
+          </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="row mt-3">
+          <div class="col-12">
+            <label for="id_phone_number" class="form-label fw-semibold"
+              >Phone Number</label
+            >
+            {{ form.phone_number }}
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between mt-4">
+          <button type="submit" class="btn btn-success px-4 rounded-pill">
+            Save and Continue
+          </button>
+          <a
+            href="{% url 'appoint' %}"
+            class="btn btn-outline-secondary px-4 rounded-pill"
+            >Cancel</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,46 +1,115 @@
-/* Reset all border radius */
-* {
-    border-radius: 0 !important;
+/* General Styling */
+.text-theme {
+    color: #3fb785 !important; /* Primary color */
 }
 
-/* Primary color */
-.text-primary {
-    color: #3fb785 !important;
+.btn-theme {
+    background-color: #3fb785;
+    border-color: #3fb785;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
-.bg-success {
+
+.btn-theme:hover {
+    background-color: #34a16f;
+    border-color: #34a16f;
+}
+
+.btn-outline-theme {
+    color: #3fb785;
+    border-color: #3fb785;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-theme:hover {
+    background-color: #3fb785;
+    color: white;
+}
+
+/* Schedule Button Styling */
+.btn-schedule {
     background-color: #3fb785 !important;
+    border-color: #3fb785;
+    color: white !important;
+    font-size: 14px;
+    padding: 5px 10px !important;
+    transition: all 0.3s ease !important;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border-radius: 8px;
 }
-.btn-success {
-    background-color: #3fb785 !important;
-    border-color: #3fb785 !important;
-}
-.btn-success:hover {
+
+.btn-schedule:hover {
     background-color: #34a16f !important;
+    border-color: #34a16f;
+    transform: scale(1.05);
 }
 
-/* General card styling */
-.card {
+/* Custom Card Styling */
+.custom-card {
     border: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: white;
 }
 
-/* Table styling */
-.table th, .table td {
-    vertical-align: middle;
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-.table-striped tbody tr:nth-of-type(odd) {
+
+/* Profile Image */
+.profile-img {
+    border: 3px solid #3fb785;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: auto;
+}
+
+/* Table Styling */
+.custom-table thead tr {
     background-color: #f9f9f9;
 }
-.table-bordered th, .table-bordered td {
-    border-color: #3fb785;
+
+.custom-table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-align: center;
+    color: #333333;
 }
 
-/* Button styling */
-.btn-outline-success {
-    color: #3fb785 !important;
-    border-color: #3fb785 !important;
+.custom-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
 }
-.btn-outline-success:hover {
-    background-color: #3fb785 !important;
-    color: white !important;
+
+.custom-table tbody td {
+    font-size: 14px;
+    color: #6c757d;
+    text-align: center;
+    padding: 12px;
+}
+
+/* Button Spacing */
+.d-flex.gap-2 {
+    gap: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .custom-card {
+        text-align: center;
+    }
+    .profile-img {
+        margin-bottom: 15px;
+    }
+    .btn-theme {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
 }

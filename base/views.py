@@ -2,18 +2,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage, send_mail
-from .forms import CreateUserForm
+from .forms import CreateUserForm, PatientForm
 from .tokens import account_activation_token
-from django.conf import settings
 from .services.disease_prediction import get_disease_prediction
-from django.http import JsonResponse
-from .models import Doctor, Appointment, Schedule
+from .models import Doctor, Appointment, Schedule, Patient
 from itertools import groupby
 from operator import attrgetter
 from .forms import BookAppointmentForm
@@ -28,8 +26,24 @@ def home(request):
     context={}
     return render(request, 'base/home.html', context)
 
+# def loginUser(request):
+#     page='login'
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+
+#         user = authenticate(request, username=username, password=password)
+
+#         if user is not None:
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             messages.error(request, 'Invalid username or password.')
+#     context={'page':page}
+#     return render(request, 'base/login_register.html', context)
+
 def loginUser(request):
-    page='login'
+    page = 'login'
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -38,14 +52,23 @@ def loginUser(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+
+            # Redirect to the user's hospital dashboard or default page
+            if hasattr(user, 'hospital'):
+                # If the user has a hospital, redirect to their dashboard
+                return redirect('hospital_dashboard')
+            else:
+                # If they don't have a hospital, redirect to a default page (like home)
+                return redirect('home')
         else:
             messages.error(request, 'Invalid username or password.')
-    context={'page':page}
+
+    context = {'page': page}
     return render(request, 'base/login_register.html', context)
+
         
 
-
+@login_required
 def logoutUser(request):
     if request.method == 'POST':
         if request.POST.get("Logout") == "Logout":
@@ -119,16 +142,22 @@ def signupUser(request):
     context = {'form': form}
     return render(request, 'base/login_register.html', context)
 
+@login_required
 def profile(request):
-    context= {}
+    appointments = Appointment.objects.filter(patient__user=request.user)
+    patient = Patient.objects.filter(user=request.user).first()
+    context = {
+        'appointments': appointments,
+        'patient':patient,
+    }
     return render(request, 'base/profile.html', context)
 
-
+@login_required
 def confirmOption(request):
     context={}
     return render(request, 'base/confirmOption.html', context)
 
-
+@login_required
 def predict(request):
     symp_list = ['anxiety and nervousness', 'depression', 'shortness of breath',
     'depressive or psychotic symptoms', 'sharp chest pain', 
@@ -280,6 +309,7 @@ def predict(request):
     context = {"list": sorted_symptoms, "range": range(1, 6)}
     return render(request, 'base/predict.html', context)
 
+@login_required
 def predict_view(request):
     if request.method == 'POST':
         selected_symptoms = [
@@ -289,13 +319,15 @@ def predict_view(request):
         ]
 
         prediction = get_disease_prediction(selected_symptoms)
+        doctors = Doctor.objects.all()
         return render(request, 'base/Prediction.html', {
             'prediction': prediction,
+            'doctors': doctors,
         })
     context = {}
     return render(request, 'base/home.html', context)
     
-
+@login_required
 def appoint(request):
     doctors = Doctor.objects.prefetch_related('schedules').all()
     current_time = timezone.now()
@@ -321,14 +353,21 @@ def appoint(request):
     return render(request, 'base/appoint.html', context)
 
 
+@login_required
+def doctor_schedule_view(request, pk):
+    doctor = get_object_or_404(Doctor, pk=pk)
+    schedules = doctor.schedules.filter(date__gte=date.today()).order_by('hospital', 'date', 'start_time')
 
-def doctor_schedule_view(request):
-    doctors = Doctor.objects.prefetch_related('schedules').all()
-    context = {
-        'doctors': doctors,
-    }
-    return render(request, 'doctor_schedule.html', context)
+    grouped_schedules = [
+        (hospital, list(schedule_group)) 
+        for hospital, schedule_group in groupby(schedules, key=attrgetter('hospital'))
+    ]
+    return render(request, 'base/doctor_schedule.html', {
+        'doctor': doctor,
+        'grouped_schedules': grouped_schedules,
+    }) 
 
+@login_required
 def doctor_profile(request, pk):
     doctor = get_object_or_404(Doctor, pk=pk)
 
@@ -344,17 +383,19 @@ def doctor_profile(request, pk):
         'grouped_schedules': grouped_schedules,
     }) 
 
+@login_required
 def book_appointment(request, schedule_id):
-    # doctor = get_object_or_404(Doctor, id=doctor_id)
     schedule = get_object_or_404(Schedule, id=schedule_id)
-    # user = request.user
+
+    if not Patient.objects.filter(user=request.user).exists():
+        return redirect('add_patient_details', schedule_id=schedule.id)
+
     if request.method == 'POST':
         form = BookAppointmentForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
             appointment = form.save(commit=False)
             appointment.doctor = schedule.doctor
-            # appointment.patient = user
+            appointment.patient = Patient.objects.get(user=request.user)
             appointment.hospital = form.cleaned_data['hospital']
             appointment.save()
 
@@ -362,8 +403,39 @@ def book_appointment(request, schedule_id):
     else:
         form = BookAppointmentForm()
 
-    return render(request, 'base/book_appointment.html', {'form': form, 'doctor': schedule.doctor, 'schedule': schedule})
+    return render(
+        request,
+        'base/book_appointment.html',
+        {'form': form, 'doctor': schedule.doctor, 'schedule': schedule}
+    )
 
+
+@login_required
+def add_patient_details(request, schedule_id):
+    if request.method == 'POST':
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            patient = form.save(commit=False)
+            patient.user = request.user
+            patient.save()
+            return redirect('book_appointment', schedule_id=schedule_id)
+    else:
+        form = PatientForm()
+
+    return render(request, 'base/add_patient_details.html', {'form': form})
+
+
+@login_required
 def appointment_confirmation(request, appointment_id):
     appointment = get_object_or_404(Appointment, id=appointment_id)
     return render(request, 'base/confirmation.html', {'appointment': appointment})
+
+
+
+@login_required
+def hospital_dashboard(request):
+    if hasattr(request.user, 'hospital'):
+        hospital = request.user.hospital
+        return render(request, 'hospital_admin/base_generic.html', {'hospital': hospital})
+    else:
+        return redirect('no_permission')

@@ -1,0 +1,32 @@
+{% extends 'base_generic.html' %} {% load static %} {% block content %}
+<style>
+  .form-container {
+    max-width: 400px;
+    margin: 0; /* Aligns form to the left */
+    padding: 10px; /* Adds some spacing */
+  }
+</style>
+<h1>Add New Appointment</h1>
+<div class="form-container" style="max-width: 400px; padding: 10px">
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="id_doctor" class="form-label">Doctor:</label>
+      {{ form.doctor }}
+    </div>
+    <div class="mb-3">
+      <label for="id_date" class="form-label">Date:</label>
+      {{ form.date }}
+    </div>
+    <div class="mb-3">
+      <label for="id_time" class="form-label">Time:</label>
+      {{ form.time }}
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Save</button>
+  </form>
+  <br />
+  <a href="{% url 'appointment_list' %}" class="btn btn-secondary w-100"
+    >Back to Appointment List</a
+  >
+</div>
+{% endblock %}

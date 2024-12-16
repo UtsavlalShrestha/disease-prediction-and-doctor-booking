@@ -1,26 +1,51 @@
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="/static/css/footer.css">
-<footer class="footer">
+<link rel="stylesheet" type="text/css" href="/static/css/footer.css" />
+<div class="page-container">
+  <div class="content-wrap">
+    <!-- Your page content here -->
+  </div>
+  <footer class="footer">
     <div class="footer-container">
-        <div class="footer-left">
-            <h3>Dis-Ease</h3>
-            <p>&copy; 2024 Dis-Ease. All Rights Reserved.</p>
-        </div>
-        
-        <div class="footer-right">
-            <ul class="footer-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-            </ul>
-            
-            <ul class="footer-social">
-                <li><a href="#"><img src="{% static 'images/facebook.png' %}" alt="Facebook"></a></li>
-                <li><a href="#"><img src="{% static 'images/twitter.png' %}" alt="Twitter"></a></li>
-                <li><a href="#"><img src="{% static 'images/instagram.png' %}" alt="Instagram"></a></li>
-            </ul>
-        </div>
+      <!-- Left Section -->
+      <div class="footer-left">
+        <h3>Dis-Ease</h3>
+        <p>Your trusted partner in healthcare.</p>
+        <p>&copy; 2024 Dis-Ease. All Rights Reserved.</p>
+      </div>
+
+      <!-- Center Section -->
+      <div class="footer-center">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- Right Section -->
+      <div class="footer-right">
+        <h4>Follow Us</h4>
+        <ul class="footer-social">
+          <li>
+            <a href="#"
+              ><img src="../static/icons/facebook.svg" alt="Facebook"
+            /></a>
+          </li>
+          <li>
+            <a href="#"
+              ><img src="../static/icons/twitter.svg" alt="Twitter"
+            /></a>
+          </li>
+          <li>
+            <a href="#"
+              ><img src="../static/icons/instagram.svg" alt="Instagram"
+            /></a>
+          </li>
+        </ul>
+      </div>
     </div>
-</footer>
+  </footer>
+</div>
