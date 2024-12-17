@@ -33,8 +33,15 @@
         />
 
         {% if messages %}
-        <div class="auth-error">{{ messages|first }}</div>
+          <div class="auth-error">
+            {% for message in messages %}
+              {% if forloop.first %}
+                <p>{{ message }}</p>
+              {% endif %}
+            {% endfor %}
+          </div>
         {% endif %}
+
 
         <input type="submit" value="Login" class="auth-button" />
       </form>

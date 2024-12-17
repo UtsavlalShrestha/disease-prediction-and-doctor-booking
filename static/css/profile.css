@@ -1,4 +1,6 @@
 .profile-container {
+    overflow: hidden; /* Prevents content from slipping out */
+    box-sizing: border-box; 
     display: flex;
     flex-direction: row; /* Align profile card and appointments side by side */
     align-items: flex-start; /* Align items at the top */
@@ -89,4 +91,91 @@
 .status-approved {
     color: #3fb785;
     font-weight: bold;
+}
+
+/* Responsive Design */
+
+/* Medium screens (tablets, 768px and up) */
+@media (max-width: 1024px) {
+    .profile-container {
+        flex-direction: column; /* Stack the cards vertically */
+        align-items: center; /* Center-align the cards */
+        padding: 1rem;
+    }
+
+    .user-card, 
+    .appointments-card {
+        width: 100%; /* Take full width */
+        max-width: 600px; /* Limit the maximum width */
+    }
+
+    .user-card {
+        text-align: center; /* Center align content for smaller screens */
+    }
+
+    .user-avatar {
+        margin: 0 auto 1rem; /* Center the avatar */
+    }
+}
+
+/* Small screens (phones, 480px and up) */
+@media (max-width: 768px) {
+    .profile-container {
+        gap: 1rem; /* Reduce spacing between cards */
+    }
+
+    .user-card,
+    .appointments-card {
+        padding: 1.5rem;
+    }
+
+    .appointments-table thead th,
+    .appointments-table tbody td {
+        font-size: 0.8rem; /* Reduce font size for smaller screens */
+        padding: 0.5rem; /* Adjust padding */
+    }
+}
+
+/* Extra small screens (phones, 480px and below) */
+@media (max-width: 480px) {
+    .user-info h2 {
+        font-size: 1.2rem; /* Smaller heading for user info */
+    }
+
+    .user-info p {
+        font-size: 0.8rem; /* Smaller font size for user details */
+    }
+
+    .appointments-title {
+        font-size: 1.2rem; /* Adjust title size */
+    }
+
+    .appointments-table {
+        font-size: 0.8rem;
+    }
+
+    .appointments-table thead {
+        display: none; /* Hide table headers for very small screens */
+    }
+
+    .appointments-table tbody td {
+        display: block; /* Display cells as blocks */
+        width: 100%; /* Full width */
+        text-align: right; /* Align text to the right */
+        padding: 0.5rem;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .appointments-table tbody td::before {
+        content: attr(data-label); /* Use data-label attribute for column names */
+        float: left;
+        text-transform: capitalize;
+        font-weight: bold;
+        color: #3fb785;
+    }
+
+    .appointments-table tbody tr {
+        margin-bottom: 1rem; /* Add space between rows */
+        display: block; /* Display rows as blocks */
+    }
 }

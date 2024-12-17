@@ -1,31 +1,36 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="/static/css/predict.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/predict.css' %}" />
 
 <div class="predict-wrapper">
-    <h2 class="predict-header">
-        <p>Welcome back, {{ user.username }} 👋</p>
-    </h2>
-    <div class="container">
-        <h4 class="sub-header">Let's find out the disease based on your symptoms</h4>
+    <!-- Welcome Header -->
+    <div class="predict-header">
+        <h1>Welcome back, {{ user.username }} 👋</h1>
+        <p class="intro-text">Let's find out the disease based on your symptoms</p>
+    </div>
+
+    <!-- Form Container -->
+    <div class="predict-container">
         <p class="description">
-            Please select up to five symptoms from the dropdowns below. This information will help us predict the most likely disease and recommend appropriate doctors or hospitals.
+            Please select up to five symptoms from the dropdowns below. This information will help us classify the most likely disease and recommend appropriate doctors or hospitals.
         </p>
+
+        <!-- Form -->
         <form method="post" action="{% url 'prediction' %}">
             {% csrf_token %}
             {% for y in range %}
             <div class="form-group">
-                <label for="symptom{{ y }}" style="text-align: left;"><strong>Symptom {{ y }}:</strong></label>
-                <select name="symptom{{ y }}" required>
+                <label for="symptom{{ y }}">Symptom {{ y }}:</label>
+                <select name="symptom{{ y }}" class="symptom-select" required>
                     <option value="">Select Symptom {{ y }}</option>
                     {% for x in list %}
-                    <option value="{{ x }}" style="color: black">{{ x }}</option>
+                    <option value="{{ x }}">{{ x }}</option>
                     {% endfor %}
                 </select>
             </div>
             {% endfor %}
-            <input type="submit" value="Predict" />
+            <button type="submit" class="submit-button">Classify</button>
         </form>
     </div>
 </div>

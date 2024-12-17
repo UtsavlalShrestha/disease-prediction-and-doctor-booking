@@ -1,89 +1,129 @@
-/* Container Styles */
-.container {
-    max-width: 600px;
-    margin: 40px auto;
-    background-color: #f7f8fc;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
+/* Global Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-/* Header Styles */
+/* Predict Wrapper */
+.predict-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em auto;
+    padding: 1em;
+}
+
+/* Header Styling */
 .predict-header {
     text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #444;
-    margin-bottom: 10px;
+    margin-bottom: 1.5em;
 }
 
-.sub-header {
-    color: #222;
-    font-size: 18px;
-    margin-bottom: 10px;
+.predict-header h1 {
+    font-size: 2.5em;
+    color: #34a16f;
+    margin-bottom: 0.2em;
+}
+
+.predict-header .intro-text {
+    color: #666;
+    font-size: 1.2em;
+}
+
+/* Form Container */
+.predict-container {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    padding: 2em;
 }
 
 .description {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 20px;
-    line-height: 1.6;
-}
-
-/* Form Styles */
-label {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px;
-    display: block;
-}
-
-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #ffffff;
-    font-size: 14px;
+    font-size: 1.1em;
     color: #555;
-    margin-bottom: 15px;
-    transition: box-shadow 0.3s ease-in-out;
+    text-align: center;
+    margin-bottom: 1.5em;
+    line-height: 1.5;
 }
 
-select:focus {
-    box-shadow: 0 0 5px #4CAF50;
+/* Form Group */
+.form-group {
+    margin-bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 0.5em;
+}
+
+.symptom-select {
+    padding: 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    color: #333;
+    transition: border 0.3s ease;
+}
+
+.symptom-select:focus {
+    border-color: #34a16f;
     outline: none;
+    box-shadow: 0 0 4px rgba(52, 161, 111, 0.5);
 }
 
-input[type="submit"] {
-    background-color: #4CAF50;
+/* Submit Button */
+.submit-button {
+    background-color: #34a16f;
     color: #fff;
-    padding: 12px 20px;
-    font-size: 16px;
+    font-size: 1.2em;
+    padding: 0.7em 2em;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 15px;
-    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: block;
+    margin: 0 auto;
 }
 
-input[type="submit"]:hover {
-    background-color: #45a049;
+.submit-button:hover {
+    background-color: #2b8c63;
+    transform: scale(1.03);
 }
 
 /* Responsive Design */
-@media screen and (max-width: 768px) {
-    .container {
-        padding: 20px;
+@media (max-width: 768px) {
+    .predict-container {
+        padding: 1.2em;
     }
 
-    .description {
-        font-size: 13px;
+    .predict-header h1 {
+        font-size: 2em;
     }
 
-    select, input[type="submit"] {
-        font-size: 14px;
+    .symptom-select {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .predict-header h1 {
+        font-size: 1.7em;
+    }
+
+    .predict-header .intro-text {
+        font-size: 1em;
+    }
+
+    .submit-button {
+        font-size: 1em;
     }
 }

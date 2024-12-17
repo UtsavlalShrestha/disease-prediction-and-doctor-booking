@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Appointment, Doctor, Schedule, Appointment, Patient
+from .models import Appointment, Doctor, Schedule, Appointment, Patient,Specialitie
 from django.forms.widgets import DateInput, TimeInput
 
 class CreateUserForm(UserCreationForm):
@@ -40,18 +40,28 @@ class PatientForm(forms.ModelForm):
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
+from django import forms
+from .models import Doctor, Specialitie
+
 class DoctorForm(forms.ModelForm):
     class Meta:
         model = Doctor
         fields = ['name', 'speciality', 'experience', 'description', 'nmc_number', 'profile_picture']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'speciality': forms.TextInput(attrs={'class': 'form-control'}),
             'experience': forms.NumberInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
             'nmc_number': forms.TextInput(attrs={'class': 'form-control'}),
             'profile_picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
+
+    speciality = forms.ModelChoiceField(
+        queryset=Specialitie.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        empty_label="Choose Speciality",
+        required=True
+    )
+
 
 class ScheduleForm(forms.ModelForm):
     class Meta:

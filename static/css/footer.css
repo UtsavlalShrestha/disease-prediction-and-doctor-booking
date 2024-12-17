@@ -1,25 +1,30 @@
+/* Ensure the container stretches the full height of the viewport */
 .page-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* Ensures the container takes up the full viewport height */
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden; /* Prevents overflow issues */
 }
 
+/* Make the content area flexible */
 .content-wrap {
-    flex: 1; 
-    padding-bottom: 20px; 
+    flex-grow: 1; /* Ensures this section takes up remaining space */
+    box-sizing: border-box; /* Ensures padding is included in height calculation */
+    overflow: auto; /* Enables scrolling if content exceeds available space */
 }
 
+/* Footer styles */
 .footer {
     background-color: #222;
     color: #fff;
-    padding: 20px; 
+    padding: 20px;
     text-align: center;
     font-size: 14px;
     width: 100%;
-    position: relative; 
-    bottom: 0;
+    margin-top: auto; /* Ensures footer stays at the bottom of the page */
+    box-sizing: border-box;
 }
-
 
 
 .footer-container {
@@ -84,10 +89,6 @@
 /* Right Section */
 .footer-right {
     flex: 1;
-}
-
-.footer-right {
-    flex: 1;
     text-align: center;
 }
 
@@ -100,7 +101,6 @@
     gap: 15px;
 }
 
-
 .footer-social li {
     display: inline-block;
 }
@@ -108,7 +108,7 @@
 .footer-social img {
     width: 28px;
     height: 28px;
-    filter: brightness(0) invert(1); /* Ensures icons appear white on a dark background */
+    filter: brightness(0) invert(1);
     transition: transform 0.3s, filter 0.3s;
 }
 

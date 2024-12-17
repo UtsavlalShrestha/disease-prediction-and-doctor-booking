@@ -1,34 +1,167 @@
-* {
-    border-radius: 0;
+/* General Body and Container Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
 }
 
-.text-primary {
-    color: #3fb785 ;
-}
-.btn-success {
-    background-color: #3fb785 ;
-    border-color: #3fb785 ;
-}
-.btn-success:hover {
-    background-color: #34a16f ;
+.container {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 0 15px;
 }
 
-.form-control {
-    border: 1px solid #ddd;
-    box-shadow: none;
+/* Header */
+h2 {
+    color: #3fb785;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
+p.text-muted {
+    font-size: 18px;
+    color: #6c757d;
+}
+
+/* Card Styling */
 .card {
-    border: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 30px;
+}
+
+/* Doctor Image */
+.card img {
+    border: 3px solid #3fb785 !important;
+    border-radius: 50%;
+    object-fit: cover;
+    width: 270px;
+    height: 270px;
+}
+
+/* Form Styling */
+label.form-label {
+    font-weight: bold;
+    color: #3fb785;
+}
+
+input.form-control {
+    background-color: #e9f7ef;
+    border: 1px solid #3fb785;
+    color: #000;
+}
+
+input.form-control:focus {
+    border-color: #3fb785;
+    box-shadow: 0 0 5px rgba(63, 183, 133, 0.5);
+}
+
+/* Buttons */
+.btn-success {
+    background-color: #3fb785 !important;
+    border: none !important;
+    font-weight: bold;
+}
+
+.btn-success:hover {
+    background-color: #35a173 !important;
+}
+
+.btn-outline-secondary {
+    border: 2px solid #3fb785;
+    color: #3fb785;
+    font-weight: bold;
 }
 
 .btn-outline-secondary:hover {
-    background-color: #ddd !important;
-    color: #000 !important;
+    background-color: #3fb785;
+    color: #fff;
 }
 
-button, a.btn {
-    text-transform: uppercase;
-    font-weight: bold;
+/* Text Alignment */
+.text-center h4 {
+    color: #3fb785;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+/* Spacing */
+.mb-3, .mb-4, .mb-5 {
+    margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    p.text-muted {
+        font-size: 16px;
+    }
+
+    .card img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    input.form-control {
+        font-size: 14px;
+    }
+
+    label.form-label {
+        font-size: 14px;
+    }
+
+    .btn-success, .btn-outline-secondary {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    h2 {
+        font-size: 20px;
+    }
+
+    .card img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    input.form-control {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    label.form-label {
+        font-size: 12px;
+    }
+
+    .btn-success, .btn-outline-secondary {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
 }

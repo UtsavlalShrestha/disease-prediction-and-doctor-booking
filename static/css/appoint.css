@@ -1,6 +1,7 @@
 /* General Styling */
 .text-theme {
     color: #3fb785 !important; /* Primary color */
+    font-family: 'Poppins', sans-serif;
 }
 
 .btn-theme {
@@ -17,8 +18,8 @@
 }
 
 .btn-outline-theme {
-    color: #3fb785;
-    border-color: #3fb785;
+    color: #3fb785 !important;
+    border-color: #3fb785 !important;
     font-size: 14px;
     transition: all 0.3s ease;
 }
@@ -34,7 +35,6 @@
     border-color: #3fb785;
     color: white !important;
     font-size: 14px;
-    padding: 5px 10px !important;
     transition: all 0.3s ease !important;
     font-weight: bold;
     transition: all 0.3s ease;
@@ -105,11 +105,56 @@
     .custom-card {
         text-align: center;
     }
+
     .profile-img {
         margin-bottom: 15px;
     }
+
     .btn-theme {
         font-size: 12px;
         padding: 8px 12px;
+    }
+
+    /* Adjust profile card layout */
+    .col-md-3 {
+        margin-bottom: 20px;
+    }
+
+    /* Table styling adjustments */
+    .custom-table th,
+    .custom-table td {
+        font-size: 12px;
+    }
+
+    .btn-schedule {
+        font-size: 12px;
+        padding: 6px 10px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-card {
+        text-align: center;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .btn-theme,
+    .btn-outline-theme {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    /* Smaller buttons */
+    .btn-schedule {
+        font-size: 12px;
+        padding: 6px 8px !important;
+    }
+
+    .custom-table {
+        font-size: 12px;
     }
 }

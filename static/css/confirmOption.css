@@ -1,39 +1,45 @@
+body {
+    background-color: #f8f9fa; /* Light gray background */
+    font-family: 'Arial', sans-serif;
+}
 .confirmOption {
-    width: 270px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    /* border-radius: 10px; */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 100px auto; /* Center the form */
     text-align: center;
 }
-
+.confirmOption p {
+    color: #34a16f; /* Green text */
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 .confirmOption button {
-    display: inline-flex;  
-    justify-content: center; 
-    width: 35%;
-    padding: 10px;
-    margin: 10px 2.5%; 
-    border: none;  
-    /* border-radius: 5px; */
-    background-color: #4CAF50;  
-    color: white;  
-    cursor: pointer;  
+    background-color: #34a16f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-
 .confirmOption button:hover {
-    background-color: #45a049; 
+    background-color: #34a16f;
 }
-
 .confirmOption a {
-    display: block;
-    margin-top: 10px;
+    display: inline-block;
+    margin-top: 20px;
     text-decoration: none;
-    color: #000000;  
-    text-align: center;
+    color: #6c757d; /* Gray color */
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
-
-.confirmOption a:hover {  
-    color: #45a049;  
+.confirmOption a:hover {
+    color: #34a16f;
 }

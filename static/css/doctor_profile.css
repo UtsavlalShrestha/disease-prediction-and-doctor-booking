@@ -1,0 +1,185 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Container */
+.container {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 0 15px;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 30px;
+}
+
+/* Doctor Profile Styling */
+.card img {
+    border: 3px solid #3fb785;
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+}
+
+h2 {
+    color: #3fb785;
+    font-weight: bold;
+}
+
+h4 {
+    color: #3fb785;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Profile Info */
+.card-body p {
+    margin: 10px 0;
+}
+
+.mb-4 {
+    margin-bottom: 20px;
+}
+
+/* Schedule Section */
+h5 {
+    color: #3fb785;
+    font-weight: bold;
+}
+
+h6 {
+    color: #3fb785;
+    margin-bottom: 10px;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.table th, .table td {
+    text-align: center;
+    padding: 10px;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #f2f2f2;
+    color: #3fb785;
+}
+
+.table td {
+    background-color: #f9f9f9;
+}
+
+/* Buttons */
+.btn-success {
+    background-color: #3fb785;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-success:hover {
+    background-color: #35a173;
+}
+
+.btn-outline-secondary {
+    border: 2px solid #3fb785;
+    color: #3fb785;
+    font-weight: bold;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #3fb785;
+    color: #fff;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .card img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    h4 {
+        font-size: 18px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .table th, .table td {
+        font-size: 14px;
+    }
+
+    .btn-success, .btn-outline-secondary {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card img {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h4 {
+        font-size: 16px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .table th, .table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .btn-success, .btn-outline-secondary {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+}
