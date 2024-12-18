@@ -107,3 +107,22 @@
   color: white;
   transform: scale(1.1);
 }
+
+.hospital-admin-btn {
+  background-color: #3fb785; /* Matching green theme */
+  color: white; /* White text for contrast */
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+  border-radius: 20px; /* Rounded corners like Logout button */
+  font-size: 14px; /* Adjust for consistency */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.hospital-admin-btn:hover {
+  background-color: #318d66; /* Darker shade on hover */
+}
+

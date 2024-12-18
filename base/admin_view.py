@@ -83,21 +83,23 @@ def schedule_list(request):
 
 @login_required
 def schedule_add(request):
-    if hasattr(request.user, 'hospital'):
+    if hasattr(request.user, 'hospital'):  # Ensure the user has a hospital attribute
         hospital = request.user.hospital
         if request.method == "POST":
-            form = ScheduleForm(request.POST)
-            form.instance.hospital = hospital
+            form = ScheduleForm(request.POST, hospital=hospital)  # Pass hospital as a keyword argument
             if form.is_valid():
                 schedule = form.save(commit=False)
+                schedule.hospital = hospital
                 schedule.save()
                 return redirect('schedule_list')
         else:
-            form = ScheduleForm()
-
+            form = ScheduleForm(hospital=hospital)  # Pass hospital as a keyword argument
+        
         return render(request, 'hospital_admin/schedule_add.html', {'form': form})
     else:
         return redirect('no_permission')
+
+
 
     
 @login_required
@@ -106,7 +108,7 @@ def schedule_edit(request, pk):
         hospital = request.user.hospital
         schedule = get_object_or_404(Schedule, pk=pk, hospital=hospital)
         if request.method == "POST":
-            form = ScheduleForm(request.POST, instance=schedule)
+            form = ScheduleForm(request.POST, instance=schedule, hospital=hospital)
             if form.is_valid():
                 updated_schedule = form.save(commit=False)
                 if updated_schedule.doctor in Doctor.objects.filter(hospitals=hospital):
@@ -115,7 +117,7 @@ def schedule_edit(request, pk):
                 else:
                     form.add_error('doctor', 'Selected doctor does not belong to your hospital.')
         else:
-            form = ScheduleForm(instance=schedule)
+            form = ScheduleForm(instance=schedule, hospital=hospital)
             form.fields['doctor'].queryset = Doctor.objects.filter(hospitals=hospital)
         return render(request, 'hospital_admin/schedule_edit.html', {'form': form, 'hospital': hospital})
     else:
@@ -148,14 +150,14 @@ def appointment_add(request):
     if hasattr(request.user, 'hospital'):
         hospital = request.user.hospital
         if request.method == "POST":
-            form = AppointmentForm(request.POST)
+            form = AppointmentForm(request.POST, hospital=hospital)
             if form.is_valid():
                 appointment = form.save(commit=False)
                 appointment.hospital = hospital
                 appointment.save()
                 return redirect('appointment_list')
         else:
-            form = AppointmentForm()
+            form = AppointmentForm(hospital=hospital)
 
         return render(request, 'hospital_admin/appointment_add.html', {'form': form})
     else:
@@ -168,7 +170,7 @@ def appointment_edit(request, pk):
         hospital = request.user.hospital
         appointment = get_object_or_404(Appointment, pk=pk, hospital=hospital)
         if request.method == "POST":
-            form = AppointmentForm(request.POST, instance=appointment)
+            form = AppointmentForm(request.POST, instance=appointment, hospital=hospital)
             if form.is_valid():
                 updated_appointment = form.save(commit=False)
                 if updated_appointment.doctor in Doctor.objects.filter(hospitals=hospital):
@@ -177,7 +179,7 @@ def appointment_edit(request, pk):
                 else:
                     form.add_error('doctor', 'Selected doctor does not belong to your hospital.')
         else:
-            form = AppointmentForm(instance=appointment)
+            form = AppointmentForm(instance=appointment, hospital=hospital)
             form.fields['doctor'].queryset = Doctor.objects.filter(hospitals=hospital)
         return render(request, 'hospital_admin/appointment_edit.html', {'form': form})
     else:

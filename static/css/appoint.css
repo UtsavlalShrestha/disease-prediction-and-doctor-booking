@@ -1,7 +1,14 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
 /* General Styling */
 .text-theme {
     color: #3fb785 !important; /* Primary color */
-    font-family: 'Poppins', sans-serif;
 }
 
 .btn-theme {

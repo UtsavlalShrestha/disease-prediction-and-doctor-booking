@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Appointment, Doctor, Schedule, Appointment, Patient,Specialitie
+from .models import Appointment, Doctor, Schedule, Appointment, Patient, Specialitie
 from django.forms.widgets import DateInput, TimeInput
 
 class CreateUserForm(UserCreationForm):
@@ -40,8 +40,6 @@ class PatientForm(forms.ModelForm):
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
-from django import forms
-from .models import Doctor, Specialitie
 
 class DoctorForm(forms.ModelForm):
     class Meta:
@@ -74,6 +72,17 @@ class ScheduleForm(forms.ModelForm):
             'doctor': forms.Select(attrs={'class': 'form-control'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        hospital = kwargs.pop('hospital', None)  # Extract hospital from kwargs
+        super().__init__(*args, **kwargs)
+        if hospital:
+            # Filter doctors based on the Many-to-Many relationship with hospital
+            self.fields['doctor'].queryset = Doctor.objects.filter(hospitals=hospital)
+        else:
+            self.fields['doctor'].queryset = Doctor.objects.none()  # Empty queryset as fallback
+
+
+
 class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
@@ -83,3 +92,13 @@ class AppointmentForm(forms.ModelForm):
             'time': TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
             'doctor': forms.Select(attrs={'class': 'form-control'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        hospital = kwargs.pop('hospital', None)  # Extract hospital from kwargs
+        super().__init__(*args, **kwargs)
+        if hospital:
+            # Filter doctors based on the Many-to-Many relationship with hospital
+            self.fields['doctor'].queryset = Doctor.objects.filter(hospitals=hospital)
+        else:
+            self.fields['doctor'].queryset = Doctor.objects.none()  # Empty queryset as fallback
+

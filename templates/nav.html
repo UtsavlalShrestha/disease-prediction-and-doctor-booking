@@ -24,6 +24,17 @@
         <span>{{ user.username }}</span>
       </a>
     </div>
+
+    {% if user.hospital %}
+    <div class="hospital-admin">
+      <a
+        href="{% url 'hospital_dashboard' %}"
+        class="nav-item hospital-admin-btn"
+        >Hospital Admin</a
+      >
+    </div>
+    {% endif %}
+
     <div class="logout">
       <a href="{% url 'logout' %}" class="nav-item logout-btn">Logout</a>
     </div>
