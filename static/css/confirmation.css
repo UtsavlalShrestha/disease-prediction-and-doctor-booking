@@ -1,31 +1,60 @@
+/* General Reset */
 * {
-    border-radius: 0;
     font-family: 'Poppins', sans-serif;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
 }
 
+/* Card Styling */
 .card {
     border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Border and Background Customization */
 .border-success {
-    border-color: #3fb785 ;
+    border-color: #3fb785 !important;
 }
+
 .bg-light {
-    background-color: #f9f9f9 ;
-}
-.text-primary {
-    color: #3fb785 ;
+    background-color: #f9f9f9 !important;
 }
 
+/* Text Color */
+.text-success {
+    color: #3fb785 !important;
+}
+
+/* Buttons */
 .btn-success {
-    background-color: #3fb785 ;
-    border-color: #3fb785 ;
-}
-.btn-success:hover {
-    background-color: #34a16f ;
+    background-color: #3fb785 !important;
+    border-color: #3fb785 !important;
+    transition: all 0.3s ease;
 }
 
-.homebutton{
-    border-radius: 0 !important;
+.btn-success:hover {
+    background-color: #34a16f !important;
+    border-color: #34a16f !important;
+}
+
+/* Button Customizations for Rounded Mobile */
+.homebutton {
+    border-radius: 5px !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .fw-bold {
+        font-size: 1rem;
+    }
+
+    .btn-success {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
 }
