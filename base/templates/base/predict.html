@@ -16,6 +16,10 @@
             Please select up to five symptoms from the dropdowns below. This information will help us classify the most likely disease and recommend appropriate doctors or hospitals.
         </p>
 
+        {% if error_message %}
+            <div class="alert alert-danger">{{ error_message }}</div>
+        {% endif %}
+
         <!-- Form -->
         <form method="post" action="{% url 'prediction' %}">
             {% csrf_token %}

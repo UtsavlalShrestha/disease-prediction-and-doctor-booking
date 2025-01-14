@@ -4,23 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="text/css" href="/static/images/Logo2.png">
-    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
-    <title> Dis-Ease</title>
+    <link rel="icon" type="text/css" href="{% static 'images/Logo2.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <title>Dis-Ease</title>
 </head>
-
 
 <body>
     {% include 'nav.html' %}
-    <!-- <h1>Welcome To Dis-Ease</h1> -->
-    
+
     {% block content %}
-
+    <!-- Child template content will go here -->
     {% endblock content %}
-    
 
+    {% block footer %}
     {% include 'footer.html' %}
+    {% endblock footer %}
 </body>
-
-
 </html>

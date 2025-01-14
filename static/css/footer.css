@@ -1,17 +1,20 @@
 /* Ensure the container stretches the full height of the viewport */
 .page-container {
     display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensures the container takes up the full viewport height */
+    flex-direction: column; /* Ensures the container takes up the full viewport height */
     font-family: 'Poppins', sans-serif;
+    margin: 0; /* Removes any default margin */
+    padding: 0; /* Removes any default padding */
     overflow: hidden; /* Prevents overflow issues */
 }
 
 /* Make the content area flexible */
 .content-wrap {
-    flex-grow: 1; /* Ensures this section takes up remaining space */
+    flex-grow: 1; /* Ensures this section takes up the remaining space */
     box-sizing: border-box; /* Ensures padding is included in height calculation */
     overflow: auto; /* Enables scrolling if content exceeds available space */
+    margin: 0; /* Removes any potential margin between the content and footer */
+    padding: 0; /* Adjust padding as needed */
 }
 
 /* Footer styles */
@@ -22,10 +25,9 @@
     text-align: center;
     font-size: 14px;
     width: 100%;
-    margin-top: auto; /* Ensures footer stays at the bottom of the page */
     box-sizing: border-box;
+    margin: 0; /* Removes any margin from the footer */
 }
-
 
 .footer-container {
     max-width: 1200px;
@@ -34,7 +36,7 @@
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 30px; /* Adjust or remove this if needed */
 }
 
 /* Left Section */

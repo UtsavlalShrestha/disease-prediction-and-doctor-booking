@@ -14,7 +14,7 @@
         {% if user.is_authenticated %}
         <form method="POST" action="{% url 'predict' %}">
           {% csrf_token %}
-          <button type="submit" class="btn predict-btn">Predict!</button>
+          <button type="submit" class="btn predict-btn">Classify!</button>
         </form>
         <form method="POST" action="{% url 'appoint' %}">
           {% csrf_token %}
@@ -23,7 +23,7 @@
         {% else %}
         <form method="POST" action="{% url 'confirmOption' %}">
           {% csrf_token %}
-          <button type="submit" class="btn predict-btn">Predict!</button>
+          <button type="submit" class="btn predict-btn">Classify!</button>
         </form>
         <form method="POST" action="{% url 'confirmOption' %}">
           {% csrf_token %}
@@ -70,6 +70,31 @@
     </div>
   </section>
 
+  <!-- Top Doctors with Most Appointments Section -->
+  <section class="top-doctors">
+    <h2>Our Top Doctors</h2>
+    <div class="doctor-container">
+      {% for doctor in top_doctors %}
+      <div class="doctor">
+        <div class="doctor-profile">
+          <img
+            src="{{ doctor.profile_picture.url }}"
+            alt="Doctor Image"
+            class="doctor-image"
+          />
+          <div class="doctor-info">
+            <h3>{{ doctor.name }}</h3>
+            <p><strong>Speciality:</strong> {{ doctor.speciality }}</p>
+            <p>
+              <strong>Hospital:</strong>{% for hospital in doctor.hospitals.all%} {{ hospital.name }}{% if not forloop.last %}, {% endif %} {%endfor %}
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
   <!-- Why Choose Us Section -->
   <section class="why-choose-us">
     <h2>Why Choose Us?</h2>
@@ -94,34 +119,6 @@
           From consultations to hospital bookings, we offer a one-stop solution
           for all your healthcare needs.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="testimonials">
-    <h2>What Our Users Say</h2>
-    <div class="testimonial-container">
-      <div class="testimonial">
-        <p>
-          "Dis-Ease helped me book a specialist in no time! The service was
-          fast, reliable, and user-friendly."
-        </p>
-        <h4>- Sarah W.</h4>
-      </div>
-      <div class="testimonial">
-        <p>
-          "The prediction tool was surprisingly accurate and helped me catch a
-          potential issue early. Highly recommend!"
-        </p>
-        <h4>- John D.</h4>
-      </div>
-      <div class="testimonial">
-        <p>
-          "Thanks to their doctor recommendations, I found the perfect
-          specialist for my needs. Fantastic service!"
-        </p>
-        <h4>- Emily R.</h4>
       </div>
     </div>
   </section>

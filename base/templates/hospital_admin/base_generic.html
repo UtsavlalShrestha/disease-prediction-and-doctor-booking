@@ -49,15 +49,22 @@
     <div class="content">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand fw-bold" href="#">
-          {{ hospital.name }} Dashboard</a
-        >
+          {{ hospital.name }} Dashboard
+        </a>
         <div class="ms-auto d-flex align-items-center">
+          <div class="logout">
+            <a href="{% url 'home' %}" class="btn logout-btn">Home</a>
+          </div>
           <div class="profile-info pe-3">
             <i class="fas fa-user-circle me-2"></i>
             {{ user.username }}
           </div>
+          <div class="logout">
+            <a href="{% url 'logout' %}" class="btn logout-btn">Logout</a>
+          </div>
         </div>
       </nav>
+      
 
       <!-- Dynamic Content Block -->
       <div class="container">{% block content %} {% endblock %}</div>

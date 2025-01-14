@@ -50,6 +50,10 @@
                                    value="{{ schedule.start_time|time:'H:i' }}" readonly>
                         </div>
 
+                        {% if error_message %}
+                            <div class="alert alert-danger">{{ error_message }}</div>
+                        {% endif %}
+
                         <!-- Buttons -->
                         <div class="d-flex justify-content-between">
                             <button type="submit" class="btn btn-success btn-lg px-4">Confirm Appointment</button>
@@ -61,5 +65,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

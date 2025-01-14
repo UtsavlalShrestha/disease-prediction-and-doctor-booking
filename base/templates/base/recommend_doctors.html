@@ -1,0 +1,189 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<div class="outer-container">
+  <div class="container">
+    <h3 class="title">
+      {% if doctors %}
+      Doctors Recommended for {{ prediction.disease }} ({{ specialty }})
+      {% else %}
+      No doctors found for the specialty "{{ specialty }}"
+      {% endif %}
+    </h3>
+
+    {% if doctors %}
+    <div class="cards-container">
+      {% for doctor in doctors %}
+      <div class="doctor-card">
+        <div class="profile-picture-container">
+          {% if doctor.profile_picture %}
+          <img src="{{ doctor.profile_picture.url }}" alt="{{ doctor.name }}" class="profile-picture" />
+          {% else %}
+          <div class="default-profile-icon"></div>
+          {% endif %}
+        </div>
+        <div class="doctor-details">
+          <h4 class="doctor-name">Dr. {{ doctor.name }}</h4>
+          <p class="doctor-specialty"><strong>Specialty:</strong> {{ doctor.speciality }}</p>
+          <p class="doctor-experience"><strong>Experience:</strong> {{ doctor.experience }} years</p>
+        </div>
+        <div class="card-actions">
+          <a href="/doctor/{{ doctor.id }}" class="btn btn-view">View Profile</a>
+          <a href="{% url 'doctorschedule' doctor.id %}" class="btn btn-appointment">Book Appointment</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="no-doctors-message">No doctors available for the given specialty. Please try again later.</p>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+/* Global styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f3f4f6;
+  margin: 0;
+  padding: 0;
+}
+
+.outer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 90vh;
+  padding: 30px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Cards container */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Individual doctor card */
+.doctor-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Profile picture container */
+.profile-picture-container {
+  background-color: #3fb785;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.profile-picture {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.default-profile-icon {
+  width: 50px;
+  height: 50px;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+/* Doctor details */
+.doctor-details {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.doctor-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.doctor-specialty,
+.doctor-experience {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Buttons */
+.card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-view {
+  color: #3fb785;
+  border: 2px solid #3fb785;
+  background-color: white;
+}
+
+.btn-view:hover {
+  background-color: #3fb785;
+  color: white;
+}
+
+.btn-appointment {
+  color: white;
+  background-color: #3fb785;
+  border: 2px solid #3fb785;
+}
+
+.btn-appointment:hover {
+  background-color: #2e965e;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .doctor-card {
+    width: 100%;
+  }
+}
+</style>
+{% endblock content %}

@@ -1,4 +1,6 @@
-{% extends 'main.html' %} {% load static %} {% block content %}
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
 <link
   rel="stylesheet"
   type="text/css"
@@ -32,13 +34,9 @@
           class="auth-input"
         />
 
-        {% if messages %}
+        {% if error_message %}
           <div class="auth-error">
-            {% for message in messages %}
-              {% if forloop.first %}
-                <p>{{ message }}</p>
-              {% endif %}
-            {% endfor %}
+            <p>{{ error_message }}</p>
           </div>
         {% endif %}
 
@@ -46,7 +44,10 @@
         <input type="submit" value="Login" class="auth-button" />
       </form>
       <p class="auth-toggle">
-        Don't have an account? <a href="/signup">Sign up here</a>
+        <a href="{% url 'password_reset' %}">Forgot Password?</a>
+      </p>
+      <p class="auth-toggle">
+        Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
       </p>
       {% else %}
       <h1 class="auth-title">Sign Up</h1>
@@ -75,13 +76,37 @@
         <label for="password_confirmation">Password confirmation:</label>
         <input type="password" name="password2" class="auth-input" />
 
+        {% if error_message_signup %}
+          <div class="auth-error">
+            <p>{{ error_message_signup }}</p>
+          </div>
+        {% endif %}
+
+        {% if messages %}
+          {% for message in messages %}
+              {% if message.tags == 'success' %}
+                  <div class="auth-success">
+                      <p>{{ message }}</p>
+                  </div>
+              {% elif message.tags == 'error' %}
+                  <div class="auth-error">
+                      <p>{{ message }}</p>
+                  </div>
+              {% endif %}
+          {% endfor %}
+      {% endif %}
+
         <input type="submit" value="Sign Up" class="auth-button" />
       </form>
       <p class="auth-toggle">
-        Already have an account? <a href="/login">Login here</a>
+        Already have an account? <a href="{% url 'login' %}">Login here</a>
       </p>
       {% endif %}
     </div>
   </div>
 </div>
 {% endblock content %}
+
+{% block footer %}
+<!-- Footer is excluded here -->
+{% endblock footer %}

@@ -107,6 +107,63 @@ body {
     gap: 8px;
 }
 
+/* Custom Search Bar Styles */
+.custom-search-bar .form-control {
+    border-color: #3fb785; /* Theme primary color */
+    background-color: #fff; /* White background for input */
+    color: #495057; /* Neutral text color */
+    border-radius: 30px; /* Rounded corners */
+    padding: 12px 20px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.custom-search-bar .form-control:focus {
+    border-color: #34a16f; /* Focus color matches hover theme */
+    box-shadow: 0 0 6px rgba(52, 161, 111, 0.5); /* Subtle glow on focus */
+    outline: none;
+}
+
+.custom-search-bar .btn-theme {
+    background-color: #3fb785; /* Theme primary color */
+    color: #fff; /* White text */
+    border-radius: 30px; /* Rounded corners */
+    padding: 12px 24px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.custom-search-bar .btn-theme:hover {
+    background-color: #34a16f; /* Hover effect */
+    border-color: #34a16f;
+    color: #fff;
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.custom-search-bar .btn-theme i {
+    margin-right: 8px; /* Space between icon and text */
+}
+
+/* Center and Responsive Styling */
+.custom-search-bar {
+    max-width: 100%;
+    width: 600px; /* Set a max width for larger screens */
+    margin: 0 auto; /* Center the search bar */
+    display: flex;
+    flex-wrap: wrap; /* Wrap elements for smaller screens */
+    gap: 10px;
+}
+
+.custom-search-bar .form-control {
+    flex: 1 1 auto; /* Grow to fill available space */
+    min-width: 200px; /* Prevent from shrinking too small */
+}
+
+.custom-search-bar .btn-theme {
+    flex: 0 0 auto; /* Keep button size fixed */
+}
+  
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .custom-card {
@@ -137,6 +194,15 @@ body {
         font-size: 12px;
         padding: 6px 10px !important;
     }
+    .custom-search-bar {
+        flex-direction: column; /* Stack elements vertically */
+        width: 100%; /* Use full width */
+    }
+
+    .custom-search-bar .form-control,
+    .custom-search-bar .btn-theme {
+        width: 100%; /* Full width for inputs and buttons */
+    }
 }
 
 @media (max-width: 576px) {
@@ -164,4 +230,5 @@ body {
     .custom-table {
         font-size: 12px;
     }
+    
 }

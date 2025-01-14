@@ -20,7 +20,6 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def doctor_add(request):
-    # Check if the user has a related hospital object
     if not hasattr(request.user, 'hospital'):
         messages.error(request, "You do not have permission to add a doctor.")
         return redirect('no_permission')
@@ -41,8 +40,6 @@ def doctor_add(request):
         form = DoctorForm()
 
     return render(request, 'hospital_admin/doctor_add.html', {'form': form, 'hospital': hospital})
-
-
 
 @login_required
 def doctor_edit(request, pk):
@@ -80,27 +77,24 @@ def schedule_list(request):
         return render(request, 'hospital_admin/schedule_list.html', {'schedules': schedules, 'hospital': hospital})
     else:
         return redirect('no_permission')
-
+    
 @login_required
 def schedule_add(request):
-    if hasattr(request.user, 'hospital'):  # Ensure the user has a hospital attribute
+    if hasattr(request.user, 'hospital'):
         hospital = request.user.hospital
         if request.method == "POST":
-            form = ScheduleForm(request.POST, hospital=hospital)  # Pass hospital as a keyword argument
+            form = ScheduleForm(request.POST, hospital=hospital)
             if form.is_valid():
                 schedule = form.save(commit=False)
                 schedule.hospital = hospital
                 schedule.save()
                 return redirect('schedule_list')
         else:
-            form = ScheduleForm(hospital=hospital)  # Pass hospital as a keyword argument
-        
-        return render(request, 'hospital_admin/schedule_add.html', {'form': form})
+            form = ScheduleForm(hospital=hospital)
+
+        return render(request, 'hospital_admin/schedule_add.html', {'form': form, 'hospital': hospital})
     else:
         return redirect('no_permission')
-
-
-
     
 @login_required
 def schedule_edit(request, pk):
@@ -123,8 +117,6 @@ def schedule_edit(request, pk):
     else:
         return redirect('no_permission')
 
-
-
 @login_required
 def schedule_delete(request, pk):
     if hasattr(request.user, 'hospital'):
@@ -134,7 +126,6 @@ def schedule_delete(request, pk):
         return redirect('schedule_list')
     else:
         return redirect('no_permission')
-
 
 @login_required
 def appointment_list(request):
@@ -154,6 +145,7 @@ def appointment_add(request):
             if form.is_valid():
                 appointment = form.save(commit=False)
                 appointment.hospital = hospital
+                print(hospital)
                 appointment.save()
                 return redirect('appointment_list')
         else:

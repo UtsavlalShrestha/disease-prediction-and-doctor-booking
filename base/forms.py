@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import Appointment, Doctor, Schedule, Appointment, Patient, Specialitie
@@ -8,6 +8,29 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+
+class CustomSetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter new password',
+            'autocomplete': 'new-password'
+        }),
+        label="New Password",
+        help_text=(
+            "Your password must be at least 8 characters long, "
+            "cannot be entirely numeric, cannot be a commonly used password, "
+            "and must not be too similar to your other personal information."
+        ),
+    )
+    new_password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Confirm new password',
+            'autocomplete': 'new-password'
+        }),
+        label="Confirm New Password",
+    )
 
 class BookAppointmentForm(forms.ModelForm):
     class Meta:
@@ -73,14 +96,12 @@ class ScheduleForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        hospital = kwargs.pop('hospital', None)  # Extract hospital from kwargs
+        hospital = kwargs.pop('hospital', None) 
         super().__init__(*args, **kwargs)
         if hospital:
-            # Filter doctors based on the Many-to-Many relationship with hospital
             self.fields['doctor'].queryset = Doctor.objects.filter(hospitals=hospital)
         else:
-            self.fields['doctor'].queryset = Doctor.objects.none()  # Empty queryset as fallback
-
+            self.fields['doctor'].queryset = Doctor.objects.none() 
 
 
 class AppointmentForm(forms.ModelForm):
@@ -94,11 +115,10 @@ class AppointmentForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        hospital = kwargs.pop('hospital', None)  # Extract hospital from kwargs
+        hospital = kwargs.pop('hospital', None) 
         super().__init__(*args, **kwargs)
         if hospital:
-            # Filter doctors based on the Many-to-Many relationship with hospital
             self.fields['doctor'].queryset = Doctor.objects.filter(hospitals=hospital)
         else:
-            self.fields['doctor'].queryset = Doctor.objects.none()  # Empty queryset as fallback
+            self.fields['doctor'].queryset = Doctor.objects.none() 
 

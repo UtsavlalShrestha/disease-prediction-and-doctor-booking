@@ -46,7 +46,7 @@ class Patient(models.Model):
 
 class Schedule(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='schedules')
-    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE, related_name='schedules')
+    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE, related_name='schedules', default=1)
     date = models.DateField(default=timezone.now)
     start_time = models.TimeField(default="10:00:00")
     end_time = models.TimeField(default="12:00:00")

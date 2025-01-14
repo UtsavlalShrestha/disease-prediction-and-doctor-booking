@@ -1,3 +1,7 @@
+body{
+    margin: 0px !important;
+    padding: 0px !important;
+}
 .profile-container {
     overflow: hidden; /* Prevents content from slipping out */
     box-sizing: border-box; 

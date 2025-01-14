@@ -1,14 +1,25 @@
-{% extends 'main.html' %} {% load static %} {% block content %}
+{% extends 'main.html' %} 
+{% load static %} 
+{% block content %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/appoint.css' %}" />
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 
 <h2 class="my-4 text-center fw-bold text-theme" style="font-size: 2.5rem">
   Book an Appointment
 </h2>
+
+<!-- Search Bar Section -->
+<div class="container mb-4">
+  <form method="GET" action="{% url 'appoint' %}">
+    <div class="input-group custom-search-bar">
+      <input type="text" class="form-control" placeholder="Search doctors by name, specialty, or hospital" name="search" value="{{ request.GET.search }}">
+      <button class="btn btn-theme" type="submit">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div>
+  </form>
+</div>
 
 <div class="container my-5">
   {% for doctor in doctors %}
@@ -36,6 +47,7 @@
 
         <!-- Schedule Section -->
         <div class="col-md-9">
+          {% if doctor.grouped_schedules.items %}
           {% for hospital, hospital_data in doctor.grouped_schedules.items %}
           <h5 class="fw-bold text-secondary mb-3">{{ hospital }}</h5>
           <table class="table custom-table">
@@ -59,8 +71,8 @@
                       <button type="button" class="btn btn-schedule btn-sm">
                         <i class="bi bi-clock me-1"></i>
                         <strong>
-                          {{ schedule.start_time|time:"H:i" }} -
-                          {{schedule.end_time|time:"H:i" }}
+                          {{ schedule.start_time|time:"H:i" }} - 
+                          {{ schedule.end_time|time:"H:i" }}
                         </strong>
                       </button>
                     </a>
@@ -72,11 +84,13 @@
             </tbody>
           </table>
           {% endfor %}
+          {% else %}
+            <p class="text-center text-muted">No scheduled appointments available.</p>
+          {% endif %}
         </div>
       </div>
     </div>
   </div>
   {% endfor %}
 </div>
-
 {% endblock %}
