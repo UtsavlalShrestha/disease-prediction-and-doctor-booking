@@ -40,6 +40,9 @@
         <div>
           <h6 class="mb-1 text-theme">{{ prediction.disease }}</h6>
           <small>{{ prediction.description }}</small>
+          <p class="card-text">
+            <b> Specialty: {{ prediction.specialty }}</b>
+          </p>
         </div>
         <a
           href="{% url 'recommend_doctors' prediction.id %}"
@@ -70,7 +73,7 @@
   /* Enlarged Top Cards */
   .large-card {
     border-radius: 20px;
-    background: linear-gradient(145deg, #f3f3f3, #e0e0e0);
+    background: #f2f2f2;
     box-shadow: 6px 6px 12px #d1d1d1, -6px -6px 12px #ffffff;
     padding: 25px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;

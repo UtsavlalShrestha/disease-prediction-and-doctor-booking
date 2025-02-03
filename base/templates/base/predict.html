@@ -38,4 +38,37 @@
         </form>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let selects = document.querySelectorAll(".symptom-select");
+    
+        function updateOptions() {
+            let selectedValues = new Set();
+            
+            selects.forEach(select => {
+                if (select.value) {
+                    selectedValues.add(select.value);
+                }
+            });
+    
+            selects.forEach(select => {
+                let options = select.querySelectorAll("option");
+                options.forEach(option => {
+                    if (option.value && selectedValues.has(option.value) && option.value !== select.value) {
+                        option.hidden = true;
+                    } else {
+                        option.hidden = false;
+                    }
+                });
+            });
+        }
+    
+        selects.forEach(select => {
+            select.addEventListener("change", updateOptions);
+        });
+    
+        updateOptions();
+    });
+    </script>
+    
 {% endblock %}

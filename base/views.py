@@ -23,9 +23,6 @@ from rapidfuzz import process
 import pandas as pd
 
 
-# Create your views here.
-
-
 def home(request):
     top_doctors = Doctor.objects.annotate(num_appointments=Count('appointment')).order_by('-num_appointments')[:3]
     context = {
