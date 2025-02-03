@@ -17,9 +17,9 @@
       <div class="doctor-card">
         <div class="profile-picture-container">
           {% if doctor.profile_picture %}
-          <img src="{{ doctor.profile_picture.url }}" alt="{{ doctor.name }}" class="profile-picture" />
+          <img src="{{ doctor.profile_picture.url }}" alt="{{ doctor.name }}" class="profile-picture" onerror="this.onerror=null;this.src='{% static 'images/default-avatar.png' %}';" />
           {% else %}
-          <div class="default-profile-icon"></div>
+          <img src="{% static 'images/default-avatar.png' %}" alt="Default Profile" class="profile-picture" />
           {% endif %}
         </div>
         <div class="doctor-details">
@@ -41,10 +41,9 @@
 </div>
 
 <style>
-/* Global styles */
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f3f4f6;
+  background-color: #f9fafb;
   margin: 0;
   padding: 0;
 }
@@ -54,7 +53,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 90vh;
+  min-height: 100vh;
   padding: 30px 20px;
 }
 
@@ -64,98 +63,87 @@ body {
 }
 
 .title {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #333;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-/* Cards container */
 .cards-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 25px;
   justify-content: center;
 }
 
-/* Individual doctor card */
 .doctor-card {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 280px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  transition: transform 0.3s ease;
+  padding: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .doctor-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Profile picture container */
 .profile-picture-container {
   background-color: #3fb785;
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   margin-bottom: 15px;
 }
 
 .profile-picture {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
   object-fit: cover;
 }
 
-.default-profile-icon {
-  width: 50px;
-  height: 50px;
-  background-color: #ffffff;
-  border-radius: 50%;
-}
-
-/* Doctor details */
 .doctor-details {
   text-align: center;
   margin-bottom: 20px;
 }
 
 .doctor-name {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 8px;
 }
 
 .doctor-specialty,
 .doctor-experience {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 0;
+  font-size: 1rem;
+  color: #4a5568;
+  margin: 5px 0;
 }
 
-/* Buttons */
 .card-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .btn {
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
-  padding: 8px 15px;
-  border-radius: 20px;
+  padding: 10px 20px;
+  border-radius: 25px;
   text-align: center;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .btn-view {
@@ -179,7 +167,6 @@ body {
   background-color: #2e965e;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .doctor-card {
     width: 100%;

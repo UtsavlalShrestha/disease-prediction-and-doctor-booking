@@ -2,14 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage, send_mail
+from django.core.mail import EmailMessage
 from django.db.models import Count, Q
 from .forms import CreateUserForm, PatientForm, BookAppointmentForm
 from .tokens import account_activation_token
@@ -18,6 +17,10 @@ from .models import Doctor, Appointment, Schedule, Patient
 from itertools import groupby
 from operator import attrgetter
 from datetime import timedelta, date
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from rapidfuzz import process
+import pandas as pd
 
 
 # Create your views here.
@@ -159,28 +162,41 @@ def predict(request):
     context = {"list": sorted_symptoms, "range": range(1, 6)}
     return render(request, 'base/predict.html', context)
 
-def probabilities(predictions):
-    if not predictions:
-        return []
+# def probabilities(predictions):
+#     if not predictions:
+#         return []
 
-    predictions = [(label, max(0.0, min(1.0, float(prob)))) for label, prob in predictions]
-    predictions = sorted(predictions, key=lambda x: x[1], reverse=True)
+#     # Extract `label` and `prob` from dictionaries
+#     predictions = [
+#         (prediction['disease'], max(0.0, min(1.0, float(prediction['probability']))))
+#         for prediction in predictions
+#     ]
 
-    if predictions and predictions[0][1] >= 1.0:
-        total_adjustment = 0.05
-        predictions[0] = (predictions[0][0], 0.95)
-        adjustment_per_other = total_adjustment / (len(predictions) - 1) if len(predictions) > 1 else 0
-        for i in range(1, len(predictions)):
-            predictions[i] = (predictions[i][0], predictions[i][1] + adjustment_per_other)
+#     predictions = sorted(predictions, key=lambda x: x[1], reverse=True)
 
-    return predictions
+#     if predictions and predictions[0][1] >= 1.0:
+#         total_adjustment = 0.05
+#         predictions[0] = (predictions[0][0], 0.95)
+#         adjustment_per_other = total_adjustment / (len(predictions) - 1) if len(predictions) > 1 else 0
+#         for i in range(1, len(predictions)):
+#             predictions[i] = (predictions[i][0], predictions[i][1] + adjustment_per_other)
 
+#     return predictions
 
 def disease_and_specialty(predicted_disease, disease_to_specialty):
+    disease_names = list(disease_to_specialty.keys())
+    
     for prediction in predicted_disease:
         disease = prediction['disease']
-        recommended_specialty = disease_to_specialty.get(disease)
-        prediction['specialty'] = recommended_specialty or "Unknown"
+        best_match, score, _ = process.extractOne(disease, disease_names)
+        
+        if score > 70:  # Only accept matches with a confidence above 70%
+            recommended_info = disease_to_specialty[best_match]
+            prediction['specialty'] = recommended_info.get('specialist', 'Unknown')
+            prediction['description'] = recommended_info.get('description', 'No description available')
+        else:
+            prediction['specialty'] = "Unknown"
+            prediction['description'] = "No description available"
     return predicted_disease
 
 @login_required
@@ -192,7 +208,18 @@ def predict_view(request):
             if request.POST.get(f'symptom{y}')
         ]
         predictions = get_disease_prediction(selected_symptoms)
-        predictions = probabilities(predictions)
+        print(predictions)
+        # predictions = {
+        #     'prediction': {
+        #         'prediction1': [('intestinal obstruction', 0.69), ('volvulus', 0.08)],
+        #         'prediction2': [('inguinal hernia', 0.12), ('cholecystitis', 0.09)]
+        #     }
+        # }
+
+        flattened_predictions = []
+        for key, values in predictions.items():
+            flattened_predictions.extend([tuple(item) for item in values])
+
         predictions = [
             {
                 "id": idx + 1,
@@ -200,11 +227,9 @@ def predict_view(request):
                 "probability": prediction[1],
                 "probability_percentage": prediction[1] * 100,
             }
-            for idx, prediction in enumerate(predictions)
+            for idx, prediction in enumerate(flattened_predictions)
         ]
-
-        # Store predictions in the session
-        request.session['predictions'] = predictions
+        # request.session['predictions'] = predictions
 
         from .data.diseases import disease_doctor_mapping
         updated_predictions = disease_and_specialty(predictions, disease_doctor_mapping)
@@ -213,21 +238,44 @@ def predict_view(request):
         return render(request, 'base/Prediction.html', {
             'predictions': updated_predictions,
         })
-    # context = {}
-    # return render(request, 'base/home.html', context)
 
 @login_required
 def recommend_doctors_view(request, prediction_id):
     predictions = request.session.get('updated_predictions', [])
     if not predictions:
         return HttpResponse("No predictions found in session", status=404)
+
     prediction = next((p for p in predictions if p['id'] == prediction_id), None)
+    if not prediction:
+        return HttpResponse("Prediction not found", status=404)
 
     specialty = prediction.get('specialty')
-    doctors = Doctor.objects.filter(speciality__name=specialty)
+    doctors = Doctor.objects.filter(speciality__name=specialty).values('id', 'name', 'speciality__name', 'description')
+    if doctors:
+        df = pd.DataFrame(list(doctors))
+
+        df.rename(columns={'speciality__name': 'speciality'}, inplace=True)
+        df['description'] = df['description'].fillna('')
+        df['combined_features'] = df['speciality'] + " " + df['description']
+
+        tfidf = TfidfVectorizer(stop_words='english')
+        tfidf_matrix = tfidf.fit_transform(df['combined_features'])
+
+        disease_description = prediction.get('description', '').strip()
+
+        if disease_description:
+            disease_vector = tfidf.transform([disease_description])
+            sim_scores = cosine_similarity(disease_vector, tfidf_matrix).flatten()
+            df['similarity_score'] = sim_scores
+            df_sorted = df.sort_values(by='similarity_score', ascending=False)
+        else:
+            df_sorted = df
+        recommended_doctors_list = df_sorted.to_dict('records')
+    else:
+        recommended_doctors_list = []
 
     return render(request, 'base/recommend_doctors.html', {
-        'doctors': doctors,
+        'doctors': recommended_doctors_list,
         'prediction': prediction,
         'specialty': specialty,
     })

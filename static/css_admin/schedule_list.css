@@ -1,3 +1,4 @@
+/* General Styling */
 body {
   font-family: "Roboto", sans-serif;
   background-color: #f7f7f7;
@@ -7,38 +8,35 @@ body {
 .container {
   max-width: 1200px;
   margin: auto;
+  padding: 20px;
 }
 
 h1 {
   font-weight: 500;
   font-size: 1.8rem;
   color: #212529;
-}
-
-.btn-primary {
-  color: white;
-  background-color: #0e3e6e;
-  border: #0e3e6e;
-  transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  color: white;
+  margin-bottom: 1.5rem;
 }
 
 .card {
   border: 1px solid #dee2e6;
-  border-radius: 4px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-  background-color: #f8f9fa;
+  background-color: #0e3e6e;
+  color: white;
   font-size: 1.1rem;
   font-weight: bold;
+  padding: 1rem;
 }
 
+/* Table Styling */
 .table {
+  width: 100%;
+  border-collapse: collapse;
   margin-bottom: 0;
 }
 
@@ -47,37 +45,53 @@ h1 {
   color: white;
   text-align: left;
   padding: 0.75rem;
+  font-weight: 500;
 }
 
 .table td {
   padding: 0.75rem;
   vertical-align: middle;
+  border-top: 1px solid #dee2e6;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: #f9f9f9;
 }
 
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Button Styling */
 .btn {
   font-size: 0.85rem;
   padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #0e3e6e;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
 }
 
 .btn-outline-primary {
   color: #0e3e6e;
   border: 1px solid #0e3e6e;
-  transition: all 0.3s ease;
 }
 
 .btn-outline-primary:hover {
-  background-color: #0056b3;
+  background-color: #0e3e6e;
   color: white;
 }
 
 .btn-outline-danger {
   color: #dc3545;
   border: 1px solid #dc3545;
-  transition: all 0.3s ease;
 }
 
 .btn-outline-danger:hover {
@@ -85,7 +99,25 @@ h1 {
   color: white;
 }
 
-.table-responsive {
-  border: 1px solid #dee2e6;
-  border-top: none;
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .table th,
+  .table td {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .card-header {
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
 }

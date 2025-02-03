@@ -1,5 +1,5 @@
-{% extends 'main.html' %} 
-{% load static %} 
+{% extends 'main.html' %}
+{% load static %}
 {% block content %}
 <link
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -7,93 +7,124 @@
 />
 
 <div class="container mt-5">
-  <!-- Prediction Section -->
-  <div class="card border-0 shadow-sm mb-5">
-    <div class="card-body">
-      <h3 class="text-primary mb-4">Possible Disease Outcomes</h3>
-      <div>
-        {% for prediction in predictions %}
-          <div class="mb-3">
-            <a
-              href="{% url 'recommend_doctors' prediction.id %}"
-              class="recommend-doctor-link"
-            >
-              <div class="clickable-section">
-                <p class="mb-1 text-start">
-                  <strong class="text-danger">{{ prediction.disease }}</strong>
-                  <small>(Specialty: {{ prediction.specialty }})</small>
-                  <!-- Custom Progress Bar -->
-                  <div class="progress-container">
-                    <div class="custom-progress-bar">
-                      <div
-                        class="custom-progress-fill"
-                        style="width: {{ prediction.probability_percentage|floatformat:2 }}%;"
-                      ></div>
-                    </div>
-                  </div>
-                </p>
-              </div>
-            </a>
+  <!-- Heading Section -->
+  <h3 class="text-primary mb-4 text-center">Possible Disease Outcomes</h3>
+
+  <!-- Top 2 Predictions Section -->
+  <div class="row justify-content-center gy-4">
+    {% for prediction in predictions|slice:":2" %}
+    <div class="col-md-6">
+      <a href="{% url 'recommend_doctors' prediction.id %}" class="recommend-doctor-link">
+        <div class="card shadow-lg border-0 h-100 large-card">
+          <div class="card-body text-center">
+            <h4 class="card-title text-theme">{{ prediction.disease }}</h4>
+            <p class="card-text">
+              <small>{{ prediction.description }}</small>
+            </p>
+            <p class="card-text">
+              <b> Specialty: {{ prediction.specialty }}</b>
+            </p>
           </div>
-        {% endfor %}
-      </div>
+        </div>
+      </a>
     </div>
+    {% endfor %}
+  </div>
+
+  <!-- Remaining Predictions Section -->
+  <div class="mt-5">
+    <h4 class="text-secondary mb-3">Other Possible Diseases</h4>
+    <ul class="list-group">
+      {% for prediction in predictions|slice:"2:" %}
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div>
+          <h6 class="mb-1 text-theme">{{ prediction.disease }}</h6>
+          <small>{{ prediction.description }}</small>
+        </div>
+        <a
+          href="{% url 'recommend_doctors' prediction.id %}"
+          class="btn btn-outline-primary btn-sm"
+        >
+          View Doctor
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
 
 <style>
-  .progress-container {
-    display: flex;
-    align-items: flex-start;
-    width: 150px;
-    margin-top: 5px;
-  }
-
-  .custom-progress-bar {
-    width: 100%;
-    height: 10px;
-    background-color: #e9ecef;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .custom-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #3fb785, #36a374);
-    transition: width 0.3s ease;
+  /* Overall theme adjustments */
+  .text-theme {
+    font-weight: bold;
+    color: #6b0a0a; /* Matches the theme's primary color */
+    text-transform: capitalize;
+    font-size: 1.3rem;
   }
 
   .recommend-doctor-link {
     text-decoration: none;
-    display: block;
+    color: inherit;
   }
 
-  .clickable-section {
-    border: 1px solid #e9ecef;
-    padding: 15px;
-    border-radius: 8px;
-    background-color: #f8f9fa;
+  /* Enlarged Top Cards */
+  .large-card {
+    border-radius: 20px;
+    background: linear-gradient(145deg, #f3f3f3, #e0e0e0);
+    box-shadow: 6px 6px 12px #d1d1d1, -6px -6px 12px #ffffff;
+    padding: 25px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+    min-height: 180px;
   }
 
-  .clickable-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+  .large-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 8px 8px 16px #bcbcbc, -8px -8px 16px #ffffff;
   }
 
-  .clickable-section:active {
-    transform: scale(0.98);
-    box-shadow: none;
+  /* List design */
+  .list-group-item {
+    border-radius: 8px;
+    border: none;
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 15px 20px;
+    margin-bottom: 8px;
   }
 
+  .btn-outline-primary {
+    color: #3fb785 !important;
+    border:1px #3fb785 !important;
+    font-size: 0.9rem;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #3fb785 !important;
+    color: #ffffff !important;
+  }
+
+  /* Heading adjustments */
   .text-primary {
     color: #3fb785 !important;
+    font-size: 2.2rem;
+    font-weight: bold;
   }
 
-  .text-danger {
+  .text-secondary {
+    color: #3fb785 !important;
+    font-size: 1.6rem;
     font-weight: bold;
+  }
+
+  /* Responsive grid adjustments */
+  @media (max-width: 768px) {
+    .text-primary {
+      font-size: 1.8rem;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+    }
   }
 </style>
 {% endblock content %}

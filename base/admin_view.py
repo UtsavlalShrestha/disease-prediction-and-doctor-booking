@@ -222,7 +222,19 @@ def appointment_delete(request, pk):
     if hasattr(request.user, 'hospital'):
         hospital = request.user.hospital
         appointment = get_object_or_404(Appointment, pk=pk, hospital=hospital)
+        send_mail(
+            subject="Appointment Cancelled",
+            message=f"Dear {appointment.patient.user.first_name} {appointment.patient.user.last_name},\n\n"
+                    f"Your appointment with Dr. {appointment.doctor.name} "
+                    f"on {appointment.date} at {appointment.time} has been cancelled.\n\n"
+                    f"Please Contact for more Information."
+                    f"Thank you,\n{hospital.name}",
+            from_email="disease.panel@gmail.com",
+            recipient_list=[appointment.patient.user.email], 
+            fail_silently=False, 
+        )
         appointment.delete()
+        messages.success(request, f"Appointment deleted and email sent to {appointment.patient.user.email}.")
         return redirect('appointment_list')
     else:
         return redirect('no_permission')

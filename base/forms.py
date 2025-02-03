@@ -107,7 +107,7 @@ class ScheduleForm(forms.ModelForm):
 class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
-        fields = ['doctor', 'date', 'time']
+        fields = ['doctor', 'date', 'time', 'patient']
         widgets = {
             'date': DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'time': TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
