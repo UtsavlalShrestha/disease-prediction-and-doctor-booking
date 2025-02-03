@@ -208,13 +208,6 @@ def predict_view(request):
             if request.POST.get(f'symptom{y}')
         ]
         predictions = get_disease_prediction(selected_symptoms)
-        print(predictions)
-        # predictions = {
-        #     'prediction': {
-        #         'prediction1': [('intestinal obstruction', 0.69), ('volvulus', 0.08)],
-        #         'prediction2': [('inguinal hernia', 0.12), ('cholecystitis', 0.09)]
-        #     }
-        # }
 
         flattened_predictions = []
         for key, values in predictions.items():
@@ -229,7 +222,6 @@ def predict_view(request):
             }
             for idx, prediction in enumerate(flattened_predictions)
         ]
-        # request.session['predictions'] = predictions
 
         from .data.diseases import disease_doctor_mapping
         updated_predictions = disease_and_specialty(predictions, disease_doctor_mapping)
