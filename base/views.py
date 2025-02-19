@@ -11,6 +11,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.db.models import Count, Q
 from .forms import CreateUserForm, PatientForm, BookAppointmentForm
+from .recommender import DoctorRecommender
 from .tokens import account_activation_token
 from .services.disease_prediction import get_disease_prediction
 from .models import Doctor, Appointment, Schedule, Patient
@@ -228,7 +229,6 @@ def predict_view(request):
             'predictions': updated_predictions,
         })
 
-@login_required
 def recommend_doctors_view(request, prediction_id):
     predictions = request.session.get('updated_predictions', [])
     if not predictions:
@@ -239,32 +239,17 @@ def recommend_doctors_view(request, prediction_id):
         return HttpResponse("Prediction not found", status=404)
 
     specialty = prediction.get('specialty')
-    doctors = Doctor.objects.filter(speciality__name=specialty).values('id', 'name', 'speciality__name', 'description')
-    if doctors:
-        df = pd.DataFrame(list(doctors))
+    disease_description = prediction.get('description', '')
 
-        df.rename(columns={'speciality__name': 'speciality'}, inplace=True)
-        df['description'] = df['description'].fillna('')
-        df['combined_features'] = df['speciality'] + " " + df['description']
+    doctors = list(Doctor.objects.filter(speciality__name=specialty).values(
+        'id', 'name', 'speciality__name', 'description', 'experience'
+    ))
 
-        tfidf = TfidfVectorizer(stop_words='english')
-        tfidf_matrix = tfidf.fit_transform(df['combined_features'])
-
-        disease_description = prediction.get('description', '').strip()
-
-        if disease_description:
-            disease_vector = tfidf.transform([disease_description])
-            sim_scores = cosine_similarity(disease_vector, tfidf_matrix).flatten()
-            df['similarity_score'] = sim_scores
-            df_sorted = df.sort_values(by='similarity_score', ascending=False)
-        else:
-            df_sorted = df
-        recommended_doctors_list = df_sorted.to_dict('records')
-    else:
-        recommended_doctors_list = []
+    recommender = DoctorRecommender(doctors, specialty, disease_description)
+    recommended_doctors = recommender.recommend()
 
     return render(request, 'base/recommend_doctors.html', {
-        'doctors': recommended_doctors_list,
+        'doctors': recommended_doctors,
         'prediction': prediction,
         'specialty': specialty,
     })
