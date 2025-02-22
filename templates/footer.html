@@ -1,6 +1,6 @@
 {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}" />
 
-<link rel="stylesheet" type="text/css" href="/static/css/footer.css" />
 <div class="page-container">
   <div class="content-wrap">
     <!-- Your page content here -->
@@ -30,19 +30,13 @@
         <h4>Follow Us</h4>
         <ul class="footer-social">
           <li>
-            <a href="#"
-              ><img src="../static/icons/facebook.svg" alt="Facebook"
-            /></a>
+            <a href="#"><img src="{% static 'icons/facebook.svg' %}" alt="Facebook" /></a>
           </li>
           <li>
-            <a href="#"
-              ><img src="../static/icons/twitter.svg" alt="Twitter"
-            /></a>
+            <a href="#"><img src="{% static 'icons/twitter.svg' %}" alt="Twitter" /></a>
           </li>
           <li>
-            <a href="#"
-              ><img src="../static/icons/instagram.svg" alt="Instagram"
-            /></a>
+            <a href="#"><img src="{% static 'icons/instagram.svg' %}" alt="Instagram" /></a>
           </li>
         </ul>
       </div>

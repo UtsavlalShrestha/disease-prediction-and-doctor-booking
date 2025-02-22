@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.utils import timezone
@@ -50,20 +51,28 @@ def home(request):
 def loginUser(request):
     page = 'login'
     error_message = None
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-
-            if hasattr(user, 'hospital'):
-                return redirect('hospital_dashboard')
-            else:
-                return redirect('home')
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            error_message = 'User does not exist. Please sign up first.'
         else:
-            error_message = 'Invalid username or password.'
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                if not user.is_active:
+                    error_message = 'Your account is not active. Please check your email for activation.'
+                else:
+                    login(request, user)
+                    if hasattr(user, 'hospital'):
+                        return redirect('hospital_dashboard')
+                    else:
+                        return redirect('home')
+            else:
+                error_message = 'Incorrect password. Please try again.'
 
     context = {'page': page, 'error_message': error_message}
     return render(request, 'base/login_register.html', context)
@@ -123,7 +132,8 @@ def activateEmail(request, user, to_email):
 
 def signupUser(request):
     form = CreateUserForm()
-    error_message = None
+    error_messages = []
+
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -132,12 +142,14 @@ def signupUser(request):
             user.username = user.username.lower()
             user.save()
             activateEmail(request, user, form.cleaned_data.get('email'))
-                    
         else:
-            error_message = "Password/Username error, please recheck and try again"
+            for field, errors in form.errors.items():
+                for error in errors:
+                    error_messages.append(f"{field.capitalize()}: {error}")
 
-    context = {'form': form , 'error_message_signup': error_message}
+    context = {'form': form, 'error_messages_signup': error_messages}
     return render(request, 'base/login_register.html', context)
+
 
 @login_required
 def profile(request):

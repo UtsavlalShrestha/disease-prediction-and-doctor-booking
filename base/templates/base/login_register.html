@@ -55,32 +55,38 @@
         {% csrf_token %}
 
         <label for="first_name">First Name:</label>
-        <input type="text" name="first_name" class="auth-input" />
+        <input type="text" name="first_name" class="auth-input" required/>
 
         <label for="last_name">Last Name:</label>
-        <input type="text" name="last_name" class="auth-input" />
+        <input type="text" name="last_name" class="auth-input" required/>
 
         <label for="username">Username:</label>
-        <input type="text" name="username" class="auth-input" />
+        <input type="text" name="username" class="auth-input" required/>
 
         <label for="email">Email address:</label>
-        <input type="email" name="email" class="auth-input" />
+        <input type="email" name="email" class="auth-input" required/>
 
         <label for="password">Password:</label>
-        <input type="password" name="password1" class="auth-input" />
+        <input type="password" name="password1" class="auth-input" required/>
         <ul class="auth-guidelines">
           <li>Your password must contain at least 8 characters.</li>
           <li>Your password can’t be entirely numeric.</li>
+          <li>Your password can’t be too similar to your other personal information.</li>
+          <li>Your password can’t be a commonly used password.</li>
+          <li>The password is too similar to the username.</li>
         </ul>
 
         <label for="password_confirmation">Password confirmation:</label>
-        <input type="password" name="password2" class="auth-input" />
+        <input type="password" name="password2" class="auth-input" required/>
 
-        {% if error_message_signup %}
-          <div class="auth-error">
-            <p>{{ error_message_signup }}</p>
-          </div>
+        {% if error_messages_signup %}
+            <div class="auth-error">
+                {% for message in error_messages_signup %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
         {% endif %}
+
 
         {% if messages %}
           {% for message in messages %}
